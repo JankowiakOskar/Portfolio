@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     font-size: 1.6rem;
+    line-height: 1.6;
     font-family: 'Merriweather', sans-serif;
   }
   

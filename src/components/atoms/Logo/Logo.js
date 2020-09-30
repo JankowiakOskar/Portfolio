@@ -4,31 +4,26 @@ import logo from 'assets/icons/logo.png';
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 `;
 
-const LogoWrapper = styled.div`
+const LogoImage = styled.img`
   width: 50px;
   height: 50px;
 `;
 
-const LogoImage = styled.img`
-  width: 100%;
-`;
-
 const Title = styled.h2`
   padding-left: 5px;
-  color: ${({ theme }) => theme.darkBlue};
-  font-size: ${({ theme }) => theme.font.size.l};
+  max-width: 150px;
+  color: ${({ theme, color }) => (color ? theme[color] : theme.white)};
 `;
 
-const Logo = () => {
+const Logo = ({ color }) => {
   return (
     <Wrapper>
-      <LogoWrapper>
-        <LogoImage src={logo} />
-      </LogoWrapper>
-      <Title>Oskar Jankowiak</Title>
+      <LogoImage src={logo} />
+      <Title color={color}>Oskar Jankowiak</Title>
     </Wrapper>
   );
 };

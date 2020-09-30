@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import gsap from 'gsap';
 import Logo from 'components/atoms/Logo/Logo';
+import Hamburger from 'components/atoms/Hamburger/Hamburger';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -40,21 +42,56 @@ const NavElement = styled.li`
   border-radius: 5px;
 `;
 
+const HamburgerWrapper = styled.div`
+  position: fixed;
+  top: 25px;
+  right: 25px;
+`;
+
 const Navigation = () => {
+  const [isMenuOpen, setOpenMenu] = useState(false);
+
+  const tl = useRef();
+  const menuRef = useRef(null);
+  const menuListRef = useRef(null);
+  const logoRef = useRef(null);
+
+  useEffect(() => {
+    const menu = menuRef.current;
+    const menuList = menuListRef.current.children;
+    const logo = logoRef.current;
+    tl.current = gsap.timeline({ pause: true });
+
+    gsap.set([...menuList, logo], { autoAlpha: 0 });
+
+    tl.current
+      .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.4, delay: 0.2 })
+      .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
+      .fromTo([...menuList], { x: '-=50' }, { x: '0', autoAlpha: 1, stagger: 0.11 }, '-=0.2');
+  }, []);
+
+  useEffect(() => {
+    const toggleAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
+    toggleAnimation();
+  }, [isMenuOpen]);
+
   return (
-    <Wrapper>
-      <LogoWrapper>
-        <Logo />
+    <Wrapper ref={menuRef}>
+      <LogoWrapper ref={logoRef}>
+        <Logo color="darkBlue" />
       </LogoWrapper>
       <Nav>
-        <List>
+        <List ref={menuListRef}>
           <NavElement>Home</NavElement>
-          <NavElement>O mnie</NavElement>
-          <NavElement>Technologie</NavElement>
-          <NavElement>Projekty</NavElement>
-          <NavElement>Kontakt</NavElement>
+          <NavElement>About me</NavElement>
+          <NavElement>Technologies</NavElement>
+          <NavElement>Projects</NavElement>
+          <NavElement>Contact</NavElement>
         </List>
       </Nav>
+      <HamburgerWrapper>
+        <Hamburger isMenuOpen={isMenuOpen} setOpenMenu={setOpenMenu} />
+      </HamburgerWrapper>
     </Wrapper>
   );
 };

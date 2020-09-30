@@ -4,13 +4,22 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Styled Components Starter`,
-    author: `Adam Romański`,
+    title: `Portfolio Gatsby`,
+    author: `Oskar Jankowiak`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    'gatsby-transformer-json',
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /svg/,
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-layout',
       options: {
@@ -41,8 +50,28 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `assets`,
-        path: `${__dirname}/src/assets`,
+        path: `./src/data/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `icons`,
+        path: `${__dirname}/src/assets/icons`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `svg`,
+        path: `${__dirname}/src/assets/svg`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/assets/images`,
       },
     },
     {
@@ -53,7 +82,7 @@ module.exports = {
         start_url: `/`,
         background_color: '#FFD226',
         theme_color: '#FFD226',
-        display: `minimal-ui`,
+        display: `standalone`,
         icon: `src/assets/icons/logo.png`,
       },
     },
@@ -92,6 +121,5 @@ module.exports = {
         ],
       },
     },
-    'gatsby-plugin-react-svg',
   ],
 };

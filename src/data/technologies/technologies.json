@@ -1,0 +1,54 @@
+[
+  {
+    "name": "CSS",
+    "icon": "../../assets/svg/css3.svg"
+  },
+  {
+    "name": "Javascript",
+    "icon": "../../assets/svg/javascript.svg"
+  },
+  {
+    "name": "React & Hooks",
+    "icon": "../../assets/svg/react-icon.svg"
+  },
+  {
+    "name": "Redux",
+    "icon": "../../assets/svg/redux.svg"
+  },
+  {
+    "name": "Sass",
+    "icon": "../../assets/svg/sass.svg"
+  },
+  {
+    "name": "Styled Components",
+    "icon": "../../assets/svg/styledComponents.svg"
+  },
+  {
+    "name": "Gatsby",
+    "icon": "../../assets/svg/gatsbyjs-icon.svg"
+  },
+  {
+    "name": "Graphql",
+    "icon": "../../assets/svg/graphql-icon.svg"
+  },
+  {
+    "name": "Strapi",
+    "icon": "../../assets/svg/strapi.svg"
+  },
+  {
+    "name": "GIT",
+    "icon": "../../assets/svg/git-icon.svg"
+  },
+  {
+    "name": "GSAP",
+    "icon": "../../assets/svg/gsap.svg"
+  },
+  {
+    "name": "Formik & Yup",
+    "icon": "../../assets/svg/formik.svg"
+  },
+  {
+    "name": "Storybook",
+    "icon": "../../assets/svg/storybook-icon.svg"
+  }
+]
