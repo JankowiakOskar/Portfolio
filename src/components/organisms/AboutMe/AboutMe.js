@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import Image from 'gatsby-image';
+import gsap from 'gsap';
 
 const Wrapper = styled.div`
   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
   min-height: 100vh;
   background-color: ${({ theme }) => theme.white};
-  opacity: 0.9;
 `;
 
 const SectionTitle = styled.h2`
@@ -18,7 +18,7 @@ const SectionTitle = styled.h2`
 
 const Description = styled.p``;
 
-const ImageWrapper = styled(Image)`
+const ImageWrapper = styled.div`
   width: 50%;
   border: 1px solid ${({ theme }) => theme.darkBlue};
   border-radius: 5px;
@@ -37,16 +37,70 @@ const AboutMe = () => {
       }
     }
   `);
-  console.log(data);
+  const wrapperRef = useRef(null);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    if (wrapperRef && imageRef) {
+      const wrapper = wrapperRef.current;
+      const title = wrapper.querySelector('[data-title]');
+      const description = wrapper.querySelector('[data-desc]');
+      const image = imageRef.current;
+
+      gsap.fromTo(
+        title,
+        { x: '-=50', autoAlpha: 0 },
+        {
+          x: '0',
+          autoAlpha: 1,
+          duration: 0.7,
+          scrollTrigger: {
+            trigger: title,
+            start: 'top 80%',
+          },
+        }
+      );
+      gsap.fromTo(
+        description,
+        { x: '+=50', autoAlpha: 0 },
+        {
+          x: '0',
+          autoAlpha: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: description,
+            start: '20% 80%',
+          },
+        }
+      );
+
+      gsap.fromTo(
+        image,
+        { y: '+=30', autoAlpha: 0 },
+        {
+          y: '0',
+          autoAlpha: 1,
+          scrollTrigger: {
+            trigger: image,
+            duration: 1,
+            start: 'top 80%',
+          },
+        }
+      );
+    }
+  }, []);
+
   return (
-    <Wrapper>
-      <SectionTitle>About Me</SectionTitle>
-      <Description>
+    <Wrapper id="aboutMe" ref={wrapperRef}>
+      <SectionTitle data-title>About Me</SectionTitle>
+      <Description data-desc>
         Hello, at my website! I am Oskar, logistics specialist by education with several years of experience. As with programming world, my current job is to solve complex problems, the difference is
         that in logistics they are mainly solved between people. Currently, I am learning programming with an emphasis on front-end, but in the future I plan to extend the scope of technology to
         backend. I think that a passion for development emerged from my current job.
       </Description>
-      <ImageWrapper fluid={data.file.childImageSharp.fluid} />
+      <ImageWrapper ref={imageRef}>
+        <Image fluid={data.file.childImageSharp.fluid} />
+      </ImageWrapper>
     </Wrapper>
   );
 };

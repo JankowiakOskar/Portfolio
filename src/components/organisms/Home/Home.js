@@ -63,7 +63,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Wrapper>
+    <Wrapper id="home">
       <LogoWrapper ref={logoWrapperRef}>
         <Logo />
       </LogoWrapper>

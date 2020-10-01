@@ -32,9 +32,9 @@ const CodingScene = () => {
 
       tl.to(box.children, { autoAlpha: 1, stagger: 0.2, duration: 0.5 })
         .fromTo(men.children, { scaleY: '0.8', transformOrigin: '50% 100%' }, { scaleY: '1', duration: 1, stagger: 0.1, autoAlpha: 1 }, '-=1')
-        .fromTo(monitor.children, { scaleY: '0.8' }, { scaleY: '1', autoAlpha: 1, stagger: 0.12 }, '-=0.7')
-        .fromTo(coffee.children, { scaleY: '0.85' }, { scaleY: '1', stagger: 0.2, autoAlpha: 1, duration: 1 }, '-=1')
         .fromTo(plant.children, { scaleY: '0.5', transformOrigin: '50% 100%' }, { scaleY: '1', duration: 1, stagger: 0.2, autoAlpha: 1 }, '-=2')
+        .fromTo(coffee.children, { scaleY: '0.85' }, { scaleY: '1', stagger: 0.2, autoAlpha: 1, duration: 1 }, '-=1')
+        .fromTo(monitor.children, { scaleY: '0.8', x: '-=30' }, { x: '0', scaleY: '1', autoAlpha: 1, stagger: 0.12 }, '-=0.7')
         .to(coffee, { y: '10', yoyo: true, repeat: -1 });
     };
 

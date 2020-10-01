@@ -2,8 +2,11 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
-
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Helmet from 'react-helmet';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const MainTemplate = ({ children }) => {
   return (

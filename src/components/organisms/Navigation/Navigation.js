@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import gsap from 'gsap';
 import Logo from 'components/atoms/Logo/Logo';
 import Hamburger from 'components/atoms/Hamburger/Hamburger';
+import scrollTo from 'gatsby-plugin-smoothscroll';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -14,7 +15,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.darkBlue};
   background-color: ${({ theme }) => theme.lightGreen};
-  z-index: ${({ theme }) => theme.zIndex.level8};
+  z-index: ${({ theme }) => theme.zIndex.level10};
   clip-path: ellipse(120px 120px at 100% 0%);
 `;
 
@@ -56,6 +57,11 @@ const Navigation = () => {
   const menuListRef = useRef(null);
   const logoRef = useRef(null);
 
+  const handleScroll = (idSelector) => {
+    const closeMenu = setOpenMenu(!isMenuOpen);
+    scrollTo(`${idSelector}`);
+  };
+
   useEffect(() => {
     const menu = menuRef.current;
     const menuList = menuListRef.current.children;
@@ -82,9 +88,9 @@ const Navigation = () => {
       </LogoWrapper>
       <Nav>
         <List ref={menuListRef}>
-          <NavElement>Home</NavElement>
-          <NavElement>About me</NavElement>
-          <NavElement>Technologies</NavElement>
+          <NavElement onClick={() => handleScroll('#home')}>Home</NavElement>
+          <NavElement onClick={() => handleScroll('#aboutMe')}>About me</NavElement>
+          <NavElement onClick={() => handleScroll('#technology')}>Technologies</NavElement>
           <NavElement>Projects</NavElement>
           <NavElement>Contact</NavElement>
         </List>
