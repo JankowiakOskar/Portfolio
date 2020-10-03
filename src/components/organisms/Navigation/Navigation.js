@@ -58,7 +58,7 @@ const Navigation = () => {
   const logoRef = useRef(null);
 
   const handleScroll = (idSelector) => {
-    const closeMenu = setOpenMenu(!isMenuOpen);
+    setOpenMenu(!isMenuOpen);
     scrollTo(`${idSelector}`);
   };
 

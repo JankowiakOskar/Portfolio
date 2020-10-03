@@ -20,15 +20,14 @@ export const colors = {
   grey300: 'hsl(0, 0%, 87%)',
   grey400: 'hsl(0, 0%, 91%)',
   grey500: 'hsl(0, 0%, 97%)',
-  primary: '#FFD226',
 };
 
 export const font = {
   size: {
     header: '4.5rem',
     paragraph: '1.7rem',
-    m: '2.0rem',
-    l: '2.5rem',
+    medium: '2.5rem',
+    large: '3rem',
     button: '1.5rem',
   },
 };

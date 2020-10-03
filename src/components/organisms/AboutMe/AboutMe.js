@@ -3,20 +3,13 @@ import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import Image from 'gatsby-image';
 import gsap from 'gsap';
+import SectionHeader from 'components/molecules/SectionHeader/SectionHeader';
 
 const Wrapper = styled.div`
   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
   min-height: 100vh;
   background-color: ${({ theme }) => theme.white};
 `;
-
-const SectionTitle = styled.h2`
-  width: 45%;
-  border-bottom: 3px solid ${({ theme }) => theme.darkBlue};
-  border-radius: 2px;
-`;
-
-const Description = styled.p``;
 
 const ImageWrapper = styled.div`
   width: 50%;
@@ -37,15 +30,14 @@ const AboutMe = () => {
       }
     }
   `);
-  const wrapperRef = useRef(null);
   const imageRef = useRef(null);
-
+  const wrapperRef = useRef(null);
   useEffect(() => {
-    if (wrapperRef && imageRef) {
-      const wrapper = wrapperRef.current;
-      const title = wrapper.querySelector('[data-title]');
-      const description = wrapper.querySelector('[data-desc]');
+    if (imageRef) {
       const image = imageRef.current;
+      const wrapper = wrapperRef.current;
+      const title = wrapper.querySelector('[data-section-title]');
+      const description = wrapper.querySelector('[data-section-description]');
 
       gsap.fromTo(
         title,
@@ -73,7 +65,6 @@ const AboutMe = () => {
           },
         }
       );
-
       gsap.fromTo(
         image,
         { y: '+=30', autoAlpha: 0 },
@@ -91,13 +82,13 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <Wrapper id="aboutMe" ref={wrapperRef}>
-      <SectionTitle data-title>About Me</SectionTitle>
-      <Description data-desc>
-        Hello, at my website! I am Oskar, logistics specialist by education with several years of experience. As with programming world, my current job is to solve complex problems, the difference is
+    <Wrapper className="section" id="aboutMe" ref={wrapperRef}>
+      <SectionHeader
+        titleText="About Me"
+        descriptionText="Hello, at my website! I am Oskar, logistics specialist by education with several years of experience. As with programming world, my current job is to solve complex problems, the difference is
         that in logistics they are mainly solved between people. Currently, I am learning programming with an emphasis on front-end, but in the future I plan to extend the scope of technology to
-        backend. I think that a passion for development emerged from my current job.
-      </Description>
+        backend. I think that a passion for development emerged from my current job."
+      />
       <ImageWrapper ref={imageRef}>
         <Image fluid={data.file.childImageSharp.fluid} />
       </ImageWrapper>

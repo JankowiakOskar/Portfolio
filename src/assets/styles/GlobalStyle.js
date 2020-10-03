@@ -26,6 +26,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-family: 'Lora', serif;
   }
+
+  p {
+    font-weight: 200;
+    color: #333333;
+  }
+
+  
   
   button {
     padding: 0;

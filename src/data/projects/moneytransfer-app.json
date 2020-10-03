@@ -1,0 +1,11 @@
+{
+  "title": "Money Transfer Memoriser",
+  "description": "It's one of my first applications, so code is messy, but in retrospect it is project which i have the greatest sentiment. Project was made only with pure Javascript CSS and local storage. App has form where you can adding your money transfers by filling out form with data like recipent, number account, currency etc. You can also delete or update transfers and checking how much transfers are unpaid.",
+  "liveLink": "https://transfermemoriser.netlify.app/",
+  "codeLink": "https://github.com/OskarJankowiak/money-transfer-memoriser",
+  "image": "../../assets/images/MoneyTransferImg.png",
+  "technologies": [
+    { "name": "Javascript", "icon": "../../assets/svg/javascript.svg" },
+    { "name": "CSS", "icon": "../../assets/svg/css3.svg" }
+  ]
+}

@@ -14,6 +14,13 @@ module.exports = {
     'gatsby-transformer-json',
     `gatsby-plugin-smoothscroll`,
     {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`lora\:400,600,700`, `merriweather\:200,400,600,700`],
+        display: 'swap',
+      },
+    },
+    {
       resolve: 'gatsby-plugin-react-svg',
       options: {
         rule: {
@@ -101,25 +108,8 @@ module.exports = {
         // utils: path.join(__dirname, 'src/utils'),
         // contexts: path.join(__dirname, 'src/contexts'),
         // providers: path.join(__dirname, 'src/providers'),
-        // hooks: path.join(__dirname, 'src/hooks'),
-        // helpers: path.join(__dirname, 'src/helpers'),
-      },
-    },
-    {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
-      options: {
-        fonts: [
-          {
-            family: `Lora`,
-            subsets: [`latin`],
-            variants: ['400', '600', '700'],
-          },
-          {
-            family: `Merriweather`,
-            sbusets: ['latin'],
-            variants: [`400`, `700`],
-          },
-        ],
+        hooks: path.join(__dirname, 'src/hooks'),
+        helpers: path.join(__dirname, 'src/helpers'),
       },
     },
   ],

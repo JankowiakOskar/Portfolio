@@ -4,7 +4,7 @@
     "icon": "../../assets/svg/css3.svg"
   },
   {
-    "name": "Javascript",
+    "name": "Javascript ES6+",
     "icon": "../../assets/svg/javascript.svg"
   },
   {
@@ -32,8 +32,20 @@
     "icon": "../../assets/svg/graphql-icon.svg"
   },
   {
+    "name": "Axios",
+    "icon": "../../assets/svg/axios.svg"
+  },
+  {
+    "name": "Postman",
+    "icon": "../../assets/svg/postman.svg"
+  },
+  {
     "name": "Strapi",
     "icon": "../../assets/svg/strapi.svg"
+  },
+  {
+    "name": "Firebase",
+    "icon": "../../assets/svg/firebase.svg"
   },
   {
     "name": "GIT",
