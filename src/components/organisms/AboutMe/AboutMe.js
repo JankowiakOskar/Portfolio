@@ -32,13 +32,13 @@ const AboutMe = () => {
   `);
   const imageRef = useRef(null);
   const wrapperRef = useRef(null);
+
   useEffect(() => {
     if (imageRef) {
       const image = imageRef.current;
       const wrapper = wrapperRef.current;
       const title = wrapper.querySelector('[data-section-title]');
       const description = wrapper.querySelector('[data-section-description]');
-
       gsap.fromTo(
         title,
         { x: '-=50', autoAlpha: 0 },
@@ -82,7 +82,7 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <Wrapper className="section" id="aboutMe" ref={wrapperRef}>
+    <Wrapper data-section data-title="About Me" id="aboutMe" ref={wrapperRef}>
       <SectionHeader
         titleText="About Me"
         descriptionText="Hello, at my website! I am Oskar, logistics specialist by education with several years of experience. As with programming world, my current job is to solve complex problems, the difference is

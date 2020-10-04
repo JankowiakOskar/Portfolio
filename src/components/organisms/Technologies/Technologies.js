@@ -46,7 +46,7 @@ const Technologies = () => {
           {
             y: '0',
             autoAlpha: 1,
-            stagger: 0.2,
+            stagger: 0.3,
             scrollTrigger: {
               trigger: child,
               start: 'bottom bottom',
@@ -60,7 +60,7 @@ const Technologies = () => {
   }, []);
 
   return (
-    <Wrapper id="technology" ref={wrapperRef}>
+    <Wrapper data-section data-title="Technologies" id="technology" ref={wrapperRef}>
       <SectionHeader
         titleText="Technologies and Tools"
         descriptionText="Below I have listed the technologies and tools that I know and used in my projects. I am currently focusing on improving and consolidating the React ecosystem and tools like Gatsby.js. Then I

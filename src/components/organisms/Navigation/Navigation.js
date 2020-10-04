@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { ActiveContext } from 'contexts/ActiveContextProvider';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import Logo from 'components/atoms/Logo/Logo';
@@ -37,10 +38,24 @@ const List = styled.ul`
 `;
 
 const NavElement = styled.li`
+  position: relative;
   padding: 20px 0;
-  font-size: ${({ theme }) => theme.font.size.m};
-  border-bottom: 3px solid ${({ theme }) => theme.white};
-  border-radius: 5px;
+  font-size: ${({ theme }) => theme.font.size.l};
+  font-weight: 600;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    top: 100%;
+    left: 0;
+    border-bottom: 3px solid ${({ theme, isActive }) => (isActive ? theme.white : theme.darkBlue)};
+    border-radius: 5px;
+    transform: scaleY(1);
+    transform: ${({ isActive }) => (isActive ? 'scaleX(1)' : 'scaleX(0.2)')};
+    transform-origin: 0% 50%;
+    transition: all 0.2s ease-in-out;
+  }
 `;
 
 const HamburgerWrapper = styled.div`
@@ -51,7 +66,7 @@ const HamburgerWrapper = styled.div`
 
 const Navigation = () => {
   const [isMenuOpen, setOpenMenu] = useState(false);
-
+  const { allSectionsList, activeSectionId } = useContext(ActiveContext);
   const tl = useRef();
   const menuRef = useRef(null);
   const menuListRef = useRef(null);
@@ -63,18 +78,20 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    const menu = menuRef.current;
-    const menuList = menuListRef.current.children;
-    const logo = logoRef.current;
-    tl.current = gsap.timeline({ pause: true });
+    if (menuRef && menuListRef && logoRef) {
+      const menu = menuRef.current;
+      const menuList = menuListRef.current.children;
+      const logo = logoRef.current;
+      tl.current = gsap.timeline({ pause: true });
 
-    gsap.set([...menuList, logo], { autoAlpha: 0 });
+      gsap.set([...menuList, logo], { autoAlpha: 0 });
 
-    tl.current
-      .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.4, delay: 0.2 })
-      .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
-      .fromTo([...menuList], { x: '-=50' }, { x: '0', autoAlpha: 1, stagger: 0.11 }, '-=0.2');
-  }, []);
+      tl.current
+        .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.4, delay: 0.2 })
+        .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
+        .fromTo([...menuList], { x: '-=50' }, { x: '0', autoAlpha: 1, stagger: 0.11 }, '-=0.2');
+    }
+  }, [menuRef, menuListRef, logoRef]);
 
   useEffect(() => {
     const toggleAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
@@ -88,11 +105,14 @@ const Navigation = () => {
       </LogoWrapper>
       <Nav>
         <List ref={menuListRef}>
-          <NavElement onClick={() => handleScroll('#home')}>Home</NavElement>
-          <NavElement onClick={() => handleScroll('#aboutMe')}>About me</NavElement>
-          <NavElement onClick={() => handleScroll('#technology')}>Technologies</NavElement>
-          <NavElement>Projects</NavElement>
-          <NavElement>Contact</NavElement>
+          {allSectionsList &&
+            [...allSectionsList]
+              .filter((section) => section.dataset.title)
+              .map((section) => (
+                <NavElement isActive={section.id === activeSectionId} key={section.dataset.title} onClick={() => handleScroll(`${`#${section.id}`}`)}>
+                  {section.dataset.title}
+                </NavElement>
+              ))}
         </List>
       </Nav>
       <HamburgerWrapper>

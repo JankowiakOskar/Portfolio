@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import scrollTo from 'gatsby-plugin-smoothscroll';
 import Navigation from 'components/organisms/Navigation/Navigation';
 import CodingScene from 'components/molecules/CodingScene/CodingScene';
 import { Button } from 'components/atoms/Button/Button';
@@ -63,7 +65,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Wrapper id="home">
+    <Wrapper data-section data-title="Home" id="home">
       <LogoWrapper ref={logoWrapperRef}>
         <Logo />
       </LogoWrapper>
@@ -71,8 +73,10 @@ const Home = () => {
       <Title ref={titleRef}>Logistic & Web development</Title>
       <CodingScene />
       <ButtonsWrapper>
-        <StyledButton>Projects</StyledButton>
-        <Button secondary>Contact</Button>
+        <StyledButton onClick={() => scrollTo('#projects')}>Projects</StyledButton>
+        <Link to="/contact">
+          <Button secondary>Contact</Button>
+        </Link>
       </ButtonsWrapper>
     </Wrapper>
   );

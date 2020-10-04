@@ -13,7 +13,7 @@ const LogoImage = styled.img`
   height: 50px;
 `;
 
-const Title = styled.h2`
+const Title = styled.h3`
   padding-left: 5px;
   max-width: 150px;
   color: ${({ theme, color }) => (color ? theme[color] : theme.white)};

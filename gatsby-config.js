@@ -106,7 +106,7 @@ module.exports = {
         // routes: path.join(__dirname, 'src/routes'),
         vendors: path.join(__dirname, 'src/vendors'),
         // utils: path.join(__dirname, 'src/utils'),
-        // contexts: path.join(__dirname, 'src/contexts'),
+        contexts: path.join(__dirname, 'src/contexts'),
         // providers: path.join(__dirname, 'src/providers'),
         hooks: path.join(__dirname, 'src/hooks'),
         helpers: path.join(__dirname, 'src/helpers'),
