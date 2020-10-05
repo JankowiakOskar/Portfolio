@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import scrollTo from 'gatsby-plugin-smoothscroll';
-import Navigation from 'components/organisms/Navigation/Navigation';
 import CodingScene from 'components/molecules/CodingScene/CodingScene';
 import { Button } from 'components/atoms/Button/Button';
 import Logo from 'components/atoms/Logo/Logo';
@@ -69,7 +68,6 @@ const Home = () => {
       <LogoWrapper ref={logoWrapperRef}>
         <Logo />
       </LogoWrapper>
-      <Navigation />
       <Title ref={titleRef}>Logistic & Web development</Title>
       <CodingScene />
       <ButtonsWrapper>

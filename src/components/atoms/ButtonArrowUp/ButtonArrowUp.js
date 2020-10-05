@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'components/atoms/button/button';
+import { Button } from 'components/atoms/Button/Button';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import ArrowUp from 'assets/svg/ArrowUp.svg';
+import { useDetectScroll } from 'hooks/useDetectScroll';
 
 const StyledButton = styled(Button)`
   position: fixed;
@@ -12,6 +13,7 @@ const StyledButton = styled(Button)`
   height: 60px;
   border-radius: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   visibility: ${({ scrollY }) => (scrollY >= 150 ? 'true' : 'hidden')};
@@ -24,7 +26,8 @@ const StyledArrowUp = styled(ArrowUp)`
   height: 50px;
 `;
 
-const ButtonArrowUp = ({ scrollY }) => {
+const ButtonArrowUp = () => {
+  const [scrollY] = useDetectScroll();
   return (
     <StyledButton scrollY={scrollY} onClick={() => scrollTo('#wrapperLayout')}>
       <StyledArrowUp />

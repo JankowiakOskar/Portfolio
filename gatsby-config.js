@@ -4,8 +4,10 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    title: `Portfolio Gatsby`,
+    title: `Oskar Jankowiak Website`,
+    description: 'Portfolio with projects and informations about me',
     author: `Oskar Jankowiak`,
+    siteURL: 'https://oskarjankowiak.com',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

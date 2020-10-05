@@ -1,12 +1,11 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import ActiveContextProvider from 'contexts/ActiveContextProvider';
+import SectionContextProvider from 'contexts/SectionContextProvider';
 import GlobalStyle from 'assets/styles/GlobalStyle';
 import { theme } from 'assets/styles/theme';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Helmet from 'react-helmet';
-import { useDetectScroll } from 'hooks/useDetectScroll';
 import Navigation from 'components/organisms/Navigation/Navigation';
 import ButtonArrowUp from 'components/atoms/ButtonArrowUp/ButtonArrowUp';
 
@@ -17,19 +16,17 @@ const WrapperLayout = styled.div`
   height: 100%;
 `;
 
-const MainTemplate = ({ children }) => {
-  const [scrollY] = useDetectScroll();
-
+const MainTemplate = ({ children, location: { pathname } }) => {
   return (
     <WrapperLayout id="wrapperLayout">
       <Helmet lang="pl" title="Oskar Jankowiak | Portfolio" />
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ActiveContextProvider>
+        <SectionContextProvider pathname={pathname}>
           {children}
-          <Navigation />
-          <ButtonArrowUp scrollY={scrollY} />
-        </ActiveContextProvider>
+          <Navigation pathname={pathname} />
+          <ButtonArrowUp />
+        </SectionContextProvider>
       </ThemeProvider>
     </WrapperLayout>
   );

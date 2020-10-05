@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const Contact = () => {
   return (
-    <Wrapper>
+    <Wrapper data-section data-title="Contact" id="contact">
       <SectionHeader secondary titleText="Contact" descriptionText="If you want contact with me, just send me message filling out form puted below or find me on social-media" />
     </Wrapper>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import { ActiveContext } from 'contexts/ActiveContextProvider';
+import { Link } from 'gatsby';
+import { SectionContext } from 'contexts/SectionContextProvider';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import Logo from 'components/atoms/Logo/Logo';
@@ -7,6 +8,7 @@ import Hamburger from 'components/atoms/Hamburger/Hamburger';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 
 const Wrapper = styled.div`
+  position: relative;
   position: fixed;
   top: 0;
   right: 0;
@@ -16,8 +18,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.darkBlue};
   background-color: ${({ theme }) => theme.lightGreen};
-  z-index: ${({ theme }) => theme.zIndex.level10};
   clip-path: ellipse(120px 120px at 100% 0%);
+  z-index: ${({ theme }) => theme.zIndex.level10};
 `;
 
 const LogoWrapper = styled.div`
@@ -39,20 +41,19 @@ const List = styled.ul`
 
 const NavElement = styled.li`
   position: relative;
-  padding: 20px 0;
+  padding: 16px 0;
   font-size: ${({ theme }) => theme.font.size.l};
   font-weight: 600;
   &:after {
     content: '';
     position: absolute;
     width: 100%;
-    height: 3px;
+    height: 5px;
     top: 100%;
     left: 0;
-    border-bottom: 3px solid ${({ theme, isActive }) => (isActive ? theme.white : theme.darkBlue)};
-    border-radius: 5px;
-    transform: scaleY(1);
-    transform: ${({ isActive }) => (isActive ? 'scaleX(1)' : 'scaleX(0.2)')};
+    border-bottom: 4px solid ${({ theme, isActive }) => (isActive ? theme.white : theme.darkBlue)};
+    border-radius: 25px;
+    transform: ${({ isActive }) => (isActive ? 'scale(1, 1)' : 'scale(0.2, 1)')};
     transform-origin: 0% 50%;
     transition: all 0.2s ease-in-out;
   }
@@ -64,9 +65,14 @@ const HamburgerWrapper = styled.div`
   right: 25px;
 `;
 
-const Navigation = () => {
+const StyledLink = styled(Link)`
+  color: #000;
+  text-decoration: none;
+`;
+
+const Navigation = ({ pathname }) => {
   const [isMenuOpen, setOpenMenu] = useState(false);
-  const { allSectionsList, activeSectionId } = useContext(ActiveContext);
+  const { menuSectionList, activeSectionId } = useContext(SectionContext);
   const tl = useRef();
   const menuRef = useRef(null);
   const menuListRef = useRef(null);
@@ -78,20 +84,19 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    if (menuRef && menuListRef && logoRef) {
-      const menu = menuRef.current;
-      const menuList = menuListRef.current.children;
-      const logo = logoRef.current;
-      tl.current = gsap.timeline({ pause: true });
+    const menu = menuRef.current;
+    const logo = logoRef.current;
+    tl.current = gsap.timeline({ pause: true });
+    gsap.set(logo, { autoAlpha: 0 });
+    tl.current.to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 }).fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2');
+  }, []);
 
-      gsap.set([...menuList, logo], { autoAlpha: 0 });
-
-      tl.current
-        .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.4, delay: 0.2 })
-        .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
-        .fromTo([...menuList], { x: '-=50' }, { x: '0', autoAlpha: 1, stagger: 0.11 }, '-=0.2');
-    }
-  }, [menuRef, menuListRef, logoRef]);
+  // useEffect(() => {
+  //   if (menuRef) {
+  //     const menuList = menuListRef.current.children;
+  //     tl.current.fromTo([...menuList], { x: '-=50', autoAlpha: 0 }, { x: '0', autoAlpha: 1, stagger: 0.2 });
+  //   }
+  // }, [menuSectionList]);
 
   useEffect(() => {
     const toggleAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
@@ -99,20 +104,28 @@ const Navigation = () => {
   }, [isMenuOpen]);
 
   return (
-    <Wrapper ref={menuRef}>
+    <Wrapper isOpen={isMenuOpen} ref={menuRef}>
       <LogoWrapper ref={logoRef}>
         <Logo color="darkBlue" />
       </LogoWrapper>
       <Nav>
         <List ref={menuListRef}>
-          {allSectionsList &&
-            [...allSectionsList]
-              .filter((section) => section.dataset.title)
-              .map((section) => (
-                <NavElement isActive={section.id === activeSectionId} key={section.dataset.title} onClick={() => handleScroll(`${`#${section.id}`}`)}>
-                  {section.dataset.title}
-                </NavElement>
-              ))}
+          {pathname === '/contact' && (
+            <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>
+              <StyledLink to="/">Home</StyledLink>
+            </NavElement>
+          )}
+          {menuSectionList.length &&
+            menuSectionList.map((section) => (
+              <NavElement isActive={section.id === activeSectionId} key={section.title} onClick={() => handleScroll(`${`#${section.id}`}`)}>
+                {section.title}
+              </NavElement>
+            ))}
+          {pathname === '/' && (
+            <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>
+              <StyledLink to="/contact">Contact</StyledLink>
+            </NavElement>
+          )}
         </List>
       </Nav>
       <HamburgerWrapper>
