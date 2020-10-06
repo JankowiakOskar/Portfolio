@@ -15,6 +15,7 @@ export const colors = {
   darkGreen: '#44592E',
   white: 'hsl(0, 0%, 100%)',
   black: 'hsl(0, 0%, 0%)',
+  red: 'hsl(0, 71%, 43%)',
   grey100: 'hsl(0, 0%, 35%)',
   grey200: 'hsl(0, 0%, 74%)',
   grey300: 'hsl(0, 0%, 87%)',
@@ -26,6 +27,7 @@ export const font = {
   size: {
     header: '4.5rem',
     paragraph: '1.7rem',
+    small: '1.4rem',
     medium: '2.5rem',
     large: '3rem',
     button: '1.5rem',

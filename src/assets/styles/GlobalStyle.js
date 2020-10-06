@@ -32,6 +32,19 @@ const GlobalStyle = createGlobalStyle`
     color: #333333;
   }
 
+  input {
+    border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+  font-size: 16px;
+
+   &:focus {
+     outline: none;
+   }
+  }
+
   
   
   button {
