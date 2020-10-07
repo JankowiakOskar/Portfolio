@@ -1,4 +1,5 @@
 {
+  "lineup": 1,
   "title": "Sticker Notes",
   "description": "React application with a lot of features. I really encourage you to check out, in short brief you can store your photos, notes, adding or updating them to favorites and filter by typing words. Project has authorisation process, multi step form with validations, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
   "liveLink": "https://photocompressor.netlify.app/",

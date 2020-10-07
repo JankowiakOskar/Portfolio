@@ -5,50 +5,62 @@ import gsap from 'gsap';
 export const SectionContext = createContext();
 
 const SectionContextProvider = ({ children, pathname }) => {
-  const [activeSection, setActiveSection] = useState('');
-  const [menuSectionList, setMenuSectionList] = useState([]);
+   const [activeSection, setActiveSection] = useState('');
+   const [menuSectionList] = useState([
+      { id: 'home', title: 'Home' },
+      {
+         id: 'aboutMe',
+         title: 'About Me',
+      },
+      {
+         id: 'technology',
+         title: 'Technologies',
+      },
+      {
+         id: 'projects',
+         title: 'Projects',
+      },
+      {
+         id: 'contact',
+         title: 'Contact',
+      },
+   ]);
 
-  useEffect(() => {
-    const sections = document.querySelectorAll('[data-section]');
+   useEffect(() => {
+      setTimeout(() => {
+         const sections = document.querySelectorAll('[data-section]');
 
-    const detectActiveSection = (sectionsArray) => {
-      [...sectionsArray].forEach((section) => {
-        const titleUnderline = section.querySelector('[data-title-underline');
+         const detectActiveSection = (sectionsArray) => {
+            [...sectionsArray].forEach((section) => {
+               const titleUnderline = section.querySelector('[data-title-underline');
 
-        return ScrollTrigger.create({
-          trigger: section,
-          start: 'top center',
-          end: 'bottom center',
-          onToggle: (self) => {
-            setActiveSection(self.trigger.id);
-            if (titleUnderline) {
-              return self.isActive ? gsap.to(titleUnderline, { transformOrigin: '0% 50%', scale: 1, duration: 0.3 }) : gsap.to(titleUnderline, { transformOrigin: '0% 50%', scale: 0, duration: 0.3 });
-            }
-            return null;
-          },
-        });
-      });
-    };
+               return ScrollTrigger.create({
+                  trigger: section,
+                  start: 'top center',
+                  end: 'bottom center',
+                  onToggle: (self) => {
+                     setActiveSection(self.trigger.id);
+                     if (titleUnderline) {
+                        return self.isActive
+                           ? gsap.to(titleUnderline, { transformOrigin: '0% 50%', scale: 1, duration: 0.3 })
+                           : gsap.to(titleUnderline, { transformOrigin: '0% 50%', scale: 0, duration: 0.3 });
+                     }
+                     return null;
+                  },
+               });
+            });
+         };
 
-    detectActiveSection(sections);
+         detectActiveSection(sections);
+      }, 300);
+   }, [pathname]);
 
-    if (pathname === '/contact') {
-      const contactMenuList = [...sections].filter((section) => section.dataset.title === 'Contact').map((section) => ({ id: section.id, title: section.dataset.title }));
+   const contextValue = {
+      activeSectionId: activeSection,
+      menuSectionList,
+   };
 
-      setMenuSectionList(contactMenuList);
-    } else if (pathname === '/') {
-      const homeMenuList = [...sections].filter((section) => section.dataset.title).map((section) => ({ id: section.id, title: section.dataset.title }));
-
-      setMenuSectionList(homeMenuList);
-    }
-  }, [pathname]);
-
-  const contextValue = {
-    activeSectionId: activeSection,
-    menuSectionList,
-  };
-
-  return <SectionContext.Provider value={contextValue}>{children}</SectionContext.Provider>;
+   return <SectionContext.Provider value={contextValue}>{children}</SectionContext.Provider>;
 };
 
 export default SectionContextProvider;

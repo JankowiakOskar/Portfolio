@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 const SectionTitle = styled.h2`
   position: relative;
-  width: 45%;
+  width: 60%;
   border-radius: 2px;
   font-size: ${({ theme }) => theme.font.size.large};
 

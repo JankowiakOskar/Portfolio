@@ -7,81 +7,98 @@ import GridList from 'components/templates/GridList/GridList';
 import SectionHeader from 'components/molecules/SectionHeader/SectionHeader';
 
 const Wrapper = styled.div`
-  padding: ${({ theme }) => theme.layout.mobileSidesPadding};
-  min-height: 100vh;
-  background-color: ${({ theme }) => theme.darkBlue};
+   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
+   min-height: 100vh;
+   background-color: ${({ theme }) => theme.darkBlue};
 `;
 
 const Technologies = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      technologies: allTechnologiesJson {
-        edges {
-          node {
-            id
-            name
-            icon {
-              publicURL
+   const data = useStaticQuery(graphql`
+      query {
+         technologies: allTechnologiesJson {
+            edges {
+               node {
+                  id
+                  name
+                  icon {
+                     publicURL
+                  }
+               }
             }
-          }
-        }
+         }
       }
-    }
-  `);
-  const {
-    technologies: { edges },
-  } = data;
+   `);
+   const {
+      technologies: { edges },
+   } = data;
 
-  const wrapperRef = useRef(null);
+   const wrapperRef = useRef(null);
 
-  useEffect(() => {
-    if (wrapperRef) {
-      const wrapper = wrapperRef.current;
-      const gridElements = wrapper.querySelector('[data-grid-technology]').children;
+   useEffect(() => {
+      if (wrapperRef) {
+         const wrapper = wrapperRef.current;
+         const title = wrapper.querySelector('h2');
+         const description = wrapper.querySelector('p');
 
-      const triggerListAnimation = (child) =>
-        gsap.fromTo(
-          child,
-          { autoAlpha: 0, y: '+=20' },
-          {
-            y: '0',
-            autoAlpha: 1,
-            stagger: 0.3,
-            scrollTrigger: {
-              trigger: child,
-              start: 'bottom bottom',
-              toggleActions: 'play none none reverse',
+         gsap.set([title, description], { autoAlpha: 0 });
+
+         gsap.fromTo(
+            title,
+            {
+               x: '+=50',
             },
-          }
-        );
+            {
+               x: '0',
+               autoAlpha: 1,
+               duration: 0.7,
+               scrollTrigger: {
+                  trigger: title,
+                  start: 'top center',
+               },
+            }
+         );
 
-      [...gridElements].forEach(triggerListAnimation);
-    }
-  }, []);
+         gsap.fromTo(
+            description,
+            {
+               y: '+=50',
+            },
+            {
+               y: '0',
+               autoAlpha: 1,
+               duration: 0.7,
+               scrollTrigger: {
+                  trigger: title,
+                  start: '20% 80%',
+               },
+            }
+         );
+      }
+   }, []);
 
-  return (
-    <Wrapper data-section data-title="Technologies" id="technology" ref={wrapperRef}>
-      <SectionHeader
-        titleText="Technologies and Tools"
-        descriptionText="Below I have listed the technologies and tools that I know and used in my projects. I am currently focusing on improving and consolidating the React ecosystem and tools like Gatsby.js. Then I
+   return (
+      <Wrapper data-section data-title="Technologies" id="technology" ref={wrapperRef}>
+         <SectionHeader
+            titleText="Technologies and Tools"
+            descriptionText="Below I have listed the technologies and tools that I know and used in my projects. I am currently focusing on improving and consolidating the React ecosystem and tools like Gatsby.js. Then I
         want to know how to test my applications."
-        secondary
-      />
-      <GridList>
-        {edges.map(
-          ({
-            node: {
-              id,
-              name,
-              icon: { publicURL },
-            },
-          }) => {
-            return <ListItem key={id} iconURL={publicURL} name={name} />;
-          }
-        )}
-      </GridList>
-    </Wrapper>
-  );
+            secondary
+         />
+         <GridList>
+            {edges.map(
+               ({
+                  node: {
+                     id,
+                     name,
+                     icon: { publicURL },
+                  },
+               }) => {
+                  return <ListItem key={id} iconURL={publicURL} name={name} />;
+               }
+            )}
+         </GridList>
+      </Wrapper>
+   );
 };
 
 export default Technologies;

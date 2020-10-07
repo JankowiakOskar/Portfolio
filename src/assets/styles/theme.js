@@ -29,7 +29,7 @@ export const font = {
     paragraph: '1.7rem',
     small: '1.4rem',
     medium: '2.5rem',
-    large: '3rem',
+    large: '3.2rem',
     button: '1.5rem',
   },
 };
