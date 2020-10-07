@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
   border-left-style: hidden;
   border-bottom-style: groove;
   background-color: #eee;
-  font-size: 16px;
+  font-size: 1.6rem;
 
    &:focus {
      outline: none;

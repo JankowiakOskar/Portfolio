@@ -21,7 +21,6 @@ const TextArea = styled.textarea`
   border-radius: 5px;
   background-color: transparent;
   color: ${({ theme }) => theme.white};
-  font-size: ${({ theme }) => theme.font.size.small};
   z-index: ${({ theme }) => theme.zIndex.level7};
   resize: none;
   transition: all 0.2s ease-in-out;

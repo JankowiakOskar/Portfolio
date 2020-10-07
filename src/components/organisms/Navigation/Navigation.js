@@ -33,6 +33,9 @@ const Nav = styled.nav`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  visibility: ${({ isMenuOpen }) => (isMenuOpen ? 'true' : 'hidden')};
+  opacity: ${({ isMenuOpen }) => (isMenuOpen ? 1 : 0)};
+  transition: opacity 0.2s ease-out visibility 0.2s 0.5s ease-out;
 `;
 
 const List = styled.ul`
@@ -66,6 +69,8 @@ const HamburgerWrapper = styled.div`
 `;
 
 const StyledLink = styled(Link)`
+  width: 100%;
+  height: 100%;
   color: #000;
   text-decoration: none;
 `;
@@ -91,13 +96,6 @@ const Navigation = ({ pathname }) => {
     tl.current.to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 }).fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2');
   }, []);
 
-  // useEffect(() => {
-  //   if (menuRef) {
-  //     const menuList = menuListRef.current.children;
-  //     tl.current.fromTo([...menuList], { x: '-=50', autoAlpha: 0 }, { x: '0', autoAlpha: 1, stagger: 0.2 });
-  //   }
-  // }, [menuSectionList]);
-
   useEffect(() => {
     const toggleAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
     toggleAnimation();
@@ -108,10 +106,15 @@ const Navigation = ({ pathname }) => {
       <LogoWrapper ref={logoRef}>
         <Logo color="darkBlue" />
       </LogoWrapper>
-      <Nav>
-        <List ref={menuListRef}>
+      <Nav isMenuOpen={isMenuOpen}>
+        <List>
           {pathname === '/contact' && (
-            <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>
+            <NavElement
+              onClick={(e) => {
+                e.preventDefault();
+                setOpenMenu(!isMenuOpen);
+              }}
+            >
               <StyledLink to="/">Home</StyledLink>
             </NavElement>
           )}
@@ -122,7 +125,12 @@ const Navigation = ({ pathname }) => {
               </NavElement>
             ))}
           {pathname === '/' && (
-            <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>
+            <NavElement
+              onClick={(e) => {
+                e.preventDefault();
+                setOpenMenu(!isMenuOpen);
+              }}
+            >
               <StyledLink to="/contact">Contact</StyledLink>
             </NavElement>
           )}
