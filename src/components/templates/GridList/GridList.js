@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 
-const Grid = styled.div`
+export const Grid = styled.div`
    display: grid;
    grid-template-columns: 1fr;
    grid-auto-rows: minmax(50px, auto);
 `;
 
-const GridList = ({ children }) => {
+const GridList = ({ children, className }) => {
    const gridListRef = useRef(null);
 
    useEffect(() => {
@@ -32,7 +32,7 @@ const GridList = ({ children }) => {
       [...gridElements].forEach(triggerListAnimation);
    }, []);
    return (
-      <Grid ref={gridListRef} data-grid-technology>
+      <Grid className={className} ref={gridListRef} data-grid-technology>
          {children}
       </Grid>
    );

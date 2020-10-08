@@ -7,11 +7,15 @@ import { Button } from 'components/atoms/Button/Button';
 import gsap from 'gsap';
 
 const ProjectWrapper = styled.div`
-   margin: 20px 0;
+   margin: 60px 0;
 `;
 
 const ProjectTitle = styled.h3`
    font-size: ${({ theme }) => theme.font.size.medium};
+
+   ${({ theme }) => theme.mq.tablet} {
+      font-size: ${({ theme }) => theme.font.size.large};
+   }
 `;
 
 const ProjectDescription = styled.p``;
@@ -20,15 +24,34 @@ const GridListWrapper = styled.div`
    padding: 20px 0;
 `;
 
+const StyledGridList = styled(GridList)`
+   ${({ theme }) => theme.mq.tablet} {
+      grid-template-columns: 1fr 1fr;
+   }
+`;
+
+const StyledListItem = styled(ListItem)`
+   font-weight: 600;
+`;
+
 const ButtonsWrapper = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: flex-start;
+
+   ${({ theme }) => theme.mq.tablet} {
+      flex-direction: row;
+      justify-content: flex-start;
+   }
 `;
 
 const StyledButton = styled(Button)`
    margin: 20px 0;
+
+   ${({ theme }) => theme.mq.tablet} {
+      margin: 0 30px 0 0;
+   }
 `;
 
 const ImageWrapper = styled.div`
@@ -38,14 +61,19 @@ const ImageWrapper = styled.div`
    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
 `;
 
+const ExternalLink = styled.a`
+   text-decoration: none;
+   color: inherit;
+`;
+
 const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd }) => {
-   const ProjectWrapperRef = useRef(null);
+   const projectWrapperRef = useRef(null);
 
    useEffect(() => {
-      const ProjectWrapper = ProjectWrapperRef.current;
-      const projectTitle = ProjectWrapper.querySelector(`[data-project-title]`);
-      const projectDesc = ProjectWrapper.querySelector(`[data-project-desc]`);
-      const projectImg = ProjectWrapper.querySelector(`[data-project-img]`);
+      const projectWrapper = projectWrapperRef.current;
+      const projectTitle = projectWrapper.querySelector(`[data-project-title]`);
+      const projectDesc = projectWrapper.querySelector(`[data-project-desc]`);
+      const projectImg = projectWrapper.querySelector(`[data-project-img]`);
 
       gsap.set([projectTitle, projectDesc, projectImg], { autoAlpha: 0 });
 
@@ -98,22 +126,30 @@ const Project = ({ title, description, liveLink, codeLink, technologies, image, 
       );
    }, []);
    return (
-      <ProjectWrapper ref={ProjectWrapperRef}>
+      <ProjectWrapper ref={projectWrapperRef}>
          <ProjectTitle data-project-title>{title}</ProjectTitle>
          <ProjectDescription data-project-desc>{description}</ProjectDescription>
          <ImageWrapper data-project-img>
             <Img fluid={image} />
          </ImageWrapper>
          <GridListWrapper>
-            <GridList>
+            <StyledGridList>
                {technologies.map(({ name, icon: { publicURL } }) => (
-                  <ListItem key={name} name={name} iconURL={publicURL} color="darkBlue" />
+                  <StyledListItem key={name} name={name} iconURL={publicURL} color="darkBlue" />
                ))}
-            </GridList>
+            </StyledGridList>
          </GridListWrapper>
          <ButtonsWrapper data-buttons-wrapper>
-            <StyledButton>Live project</StyledButton>
-            <Button thirdiary>View Code</Button>
+            <StyledButton>
+               <ExternalLink href={liveLink} target="_blank">
+                  Live project
+               </ExternalLink>
+            </StyledButton>
+            <Button thirdiary>
+               <ExternalLink href={codeLink} target="_blank">
+                  View Code
+               </ExternalLink>
+            </Button>
          </ButtonsWrapper>
       </ProjectWrapper>
    );

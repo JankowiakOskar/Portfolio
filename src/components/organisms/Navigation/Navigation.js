@@ -46,7 +46,7 @@ const NavElement = styled.li`
    position: relative;
    padding: 16px 0;
    font-size: ${({ theme }) => theme.font.size.l};
-   color: ${({ theme }) => theme.darkBlue};
+   color: ${({ theme, isActive }) => (isActive ? theme.white : theme.darkBlue)};
    font-weight: 600;
    &:after {
       content: '';
@@ -59,7 +59,7 @@ const NavElement = styled.li`
       border-radius: 25px;
       transform: ${({ isActive }) => (isActive ? 'scale(1, 1)' : 'scale(0.2, 1)')};
       transform-origin: 0% 50%;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.3s ease-in-out;
    }
 `;
 

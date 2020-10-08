@@ -13,6 +13,11 @@ const StyledScene = styled(Scene)`
    height: 50vh;
    width: 70%;
    opacity: 0.8;
+
+   ${({ theme }) => theme.mq.tablet} {
+      height: 90vh;
+      width: 95%;
+   }
 `;
 
 const CodingScene = () => {

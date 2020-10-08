@@ -5,11 +5,22 @@ import gsap from 'gsap';
 import ListItem from 'components/atoms/ListItem/ListItem';
 import GridList from 'components/templates/GridList/GridList';
 import SectionHeader from 'components/molecules/SectionHeader/SectionHeader';
+import ToolScene from 'components/molecules/ToolScene/ToolScene';
 
 const Wrapper = styled.div`
    padding: ${({ theme }) => theme.layout.mobileSidesPadding};
    min-height: 100vh;
    background-color: ${({ theme }) => theme.darkBlue};
+
+   ${({ theme }) => theme.mq.tablet} {
+      padding: 50px;
+   }
+`;
+
+const StyledGridList = styled(GridList)`
+   ${({ theme }) => theme.mq.tablet} {
+      grid-template-columns: 1fr 1fr;
+   }
 `;
 
 const Technologies = () => {
@@ -84,7 +95,7 @@ const Technologies = () => {
         want to know how to test my applications."
             secondary
          />
-         <GridList>
+         <StyledGridList>
             {edges.map(
                ({
                   node: {
@@ -96,7 +107,8 @@ const Technologies = () => {
                   return <ListItem key={id} iconURL={publicURL} name={name} />;
                }
             )}
-         </GridList>
+         </StyledGridList>
+         <ToolScene />
       </Wrapper>
    );
 };

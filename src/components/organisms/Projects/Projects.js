@@ -8,6 +8,11 @@ import gsap from 'gsap';
 const Wrapper = styled.div`
    padding: ${({ theme }) => theme.layout.mobileSidesPadding};
    background-color: ${({ theme }) => theme.white};
+   box-shadow: inset 0px 0px 30px -8px rgba(0, 0, 0, 0.75);
+
+   ${({ theme }) => theme.mq.tablet} {
+      padding: 50px;
+   }
 `;
 
 const Projects = () => {

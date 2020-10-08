@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     line-height: 1.6;
     font-family: 'Merriweather', sans-serif;
+
+    @media(min-width: 768px) {
+      font-size: 1.8rem;
+    }
   }
   
   h1, h2, h3, h4, h5, span {
@@ -30,6 +34,8 @@ const GlobalStyle = createGlobalStyle`
   p {
     font-weight: 200;
     color: #333333;
+
+    
   }
 
   input {
@@ -57,6 +63,19 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     list-style: none;
   }
+
+  body::-webkit-scrollbar {
+  width: 0.5em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #A6BF67;
+  outline: 1px solid #A6BF67;
+}
 `;
 
 export default GlobalStyle;
