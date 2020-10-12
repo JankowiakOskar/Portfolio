@@ -1,16 +1,16 @@
 {
-  "lineup": 2,
-  "title": "Posts Loader",
-  "description": "Project made with React, Redux, Firebase and Wordpress API. Little brief of features, app has authorisation with firebase, users which weren't authenticated can only display six posts. If you want see more, you have to sign or log in ",
-  "liveLink": "https://postsloader.netlify.app/",
-  "codeLink": "https://github.com/OskarJankowiak/posts_loader",
-  "image": "../../assets/images/PostsLoaderImg.png",
-  "technologies": [
-    { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
-    { "name": "React Router", "icon": "../../assets/svg/react-router.svg" },
-    { "name": "Redux", "icon": "../../assets/svg/redux.svg" },
-    { "name": "Sass", "icon": "../../assets/svg/sass.svg" },
-    { "name": "Firebase", "icon": "../../assets/svg/firebase.svg" },
-    { "name": "GSAP", "icon": "../../assets/svg/gsap.svg" }
-  ]
+   "lineup": 2,
+   "title": "Posts Loader",
+   "description": "Project made with React, Redux, Firebase and Wordpress API. Little brief of features, app has authorisation with firebase, users which weren't authenticated can only display six posts. If you want see more, you have to sign or log in ",
+   "liveLink": "https://postsloader.netlify.app/",
+   "codeLink": "https://github.com/OskarJankowiak/posts_loader",
+   "image": "../../assets/images/PostsLoaderImg.png",
+   "technologies": [
+      { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
+      { "name": "React Router", "icon": "../../assets/svg/react-router.svg" },
+      { "name": "Redux", "icon": "../../assets/svg/redux.svg" },
+      { "name": "Sass", "icon": "../../assets/svg/sass.svg" },
+      { "name": "Firebase", "icon": "../../assets/svg/firebase.svg" },
+      { "name": "GSAP", "icon": "../../assets/svg/gsap.svg" }
+   ]
 }

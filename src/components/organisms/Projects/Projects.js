@@ -6,12 +6,40 @@ import SectionHeader from 'components/molecules/SectionHeader/SectionHeader';
 import gsap from 'gsap';
 
 const Wrapper = styled.div`
-   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
+   width: 100%;
    background-color: ${({ theme }) => theme.white};
    box-shadow: inset 0px 0px 30px -8px rgba(0, 0, 0, 0.75);
+`;
+
+const InnerWrapper = styled.div`
+   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
+   margin: 0 auto;
+   max-width: 1660px;
 
    ${({ theme }) => theme.mq.tablet} {
       padding: 50px;
+   }
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      min-height: 0;
+      height: 100%;
+      padding: 100px;
+   }
+`;
+
+const StyledSectionHeader = styled(SectionHeader)`
+   ${({ theme }) => theme.mq.desktop} {
+      && {
+         width: 45%;
+      }
+   }
+`;
+
+const StyledProject = styled(Project)`
+   ${({ theme }) => theme.mq.desktop} {
+      && {
+         padding: 60px;
+      }
    }
 `;
 
@@ -35,7 +63,7 @@ const Projects = () => {
                   }
                   image {
                      childImageSharp {
-                        fluid {
+                        fluid(maxWidth: 1000, quality: 100) {
                            ...GatsbyImageSharpFluid
                         }
                      }
@@ -93,23 +121,26 @@ const Projects = () => {
 
    return (
       <Wrapper data-section data-title="Projects" id="projects" ref={wrapperRef}>
-         <SectionHeader
-            titleText="Projects"
-            descriptionText="Below I present projects that I have managed to implement in the last year since I started learning web development. My technical skills grow from project to project, the next one will be an
-        online store."
-         />
-         {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup } }) => (
-            <Project
-               key={id}
-               title={title}
-               description={description}
-               liveLink={liveLink}
-               codeLink={codeLink}
-               image={image.childImageSharp.fluid}
-               technologies={technologies}
-               isOdd={Boolean(lineup % 2)}
+         <InnerWrapper>
+            <StyledSectionHeader
+               titleText="Projects"
+               shortTitle
+               descriptionText="
+               Below I present projects that I managed to implement during the last year of studying web development. Another one that I plan to do is e-commerce store. And while my technical skills aren't as good as I would like them to be, they grow from project to project."
             />
-         ))}
+            {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup } }) => (
+               <StyledProject
+                  key={id}
+                  title={title}
+                  description={description}
+                  liveLink={liveLink}
+                  codeLink={codeLink}
+                  image={image.childImageSharp.fluid}
+                  technologies={technologies}
+                  isOdd={Boolean(lineup % 2)}
+               />
+            ))}
+         </InnerWrapper>
       </Wrapper>
    );
 };

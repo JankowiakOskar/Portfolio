@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Button } from 'components/atoms/button/button';
 
 const Wrapper = styled.div`
-   height: 120px;
+   height: 140px;
    width: 100%;
    background-color: ${({ theme }) => theme.lightGreen};
    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.75);
@@ -16,17 +16,15 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.p`
+   padding: 10px;
+   height: 70%;
    font-size: ${({ theme }) => theme.font.size.m};
    text-align: center;
 `;
 
-const StyledButton = styled(Button)`
-   margin-bottom: 20px;
-`;
-
 const StyledLink = styled(Link)`
-   width: 100%;
-   height: 100%;
+   height: 30%;
+   margin: 0 auto 35px;
    color: inherit;
    text-decoration: none;
 `;
@@ -35,7 +33,9 @@ const Footer = ({ pathname }) => {
    return (
       <Wrapper>
          <Content>&copy; 2020 All rights resereved. Website made by Oskar Jankowiak.</Content>
-         <StyledButton thirdiary>{pathname === '/' ? <StyledLink to="/contact">Contact</StyledLink> : <StyledLink to="/">Home</StyledLink>}</StyledButton>
+         <StyledLink to={pathname === '/' ? '/contact' : '/'}>
+            <Button thirdiary>{pathname === '/' ? 'Contact' : 'Home'}</Button>
+         </StyledLink>
       </Wrapper>
    );
 };

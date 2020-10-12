@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const SectionTitle = styled.h2`
+export const SectionTitle = styled.h2`
    position: relative;
    width: 60%;
    border-radius: 2px;
@@ -11,6 +11,10 @@ const SectionTitle = styled.h2`
       font-size: ${({ theme }) => theme.font.size.xl};
    }
 
+   ${({ theme }) => theme.mq.bigTablet} {
+      width: ${({ shortTitle }) => (shortTitle ? '20%' : '60%')};
+   }
+
    ${({ secondary }) =>
       secondary &&
       css`
@@ -18,7 +22,7 @@ const SectionTitle = styled.h2`
       `}
 `;
 
-const BorderBottom = styled.span`
+export const BorderBottom = styled.span`
    display: inline-block;
    position: absolute;
    width: 100%;
@@ -30,14 +34,14 @@ const BorderBottom = styled.span`
    border-radius: 2px;
 `;
 
-const SectionDescription = styled.p`
+export const SectionDescription = styled.p`
    color: ${({ theme, secondary }) => secondary && theme.white};
 `;
 
-const SectionHeader = ({ titleText, descriptionText, secondary, className }) => {
+const SectionHeader = ({ titleText, descriptionText, secondary, className, shortTitle }) => {
    return (
       <>
-         <SectionTitle data-section-title secondary={secondary}>
+         <SectionTitle data-section-title secondary={secondary} shortTitle={shortTitle}>
             {titleText}
             <BorderBottom data-title-underline secondary={secondary} />
          </SectionTitle>

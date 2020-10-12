@@ -6,33 +6,37 @@ import ArrowUp from 'assets/svg/ArrowUp.svg';
 import { useDetectScroll } from 'hooks/useDetectScroll';
 
 const StyledButton = styled(Button)`
-  position: fixed;
-  top: 85%;
-  right: 15px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  visibility: ${({ scrollY }) => (scrollY >= 150 ? 'true' : 'hidden')};
-  opacity: ${({ scrollY }) => (scrollY >= 150 ? '1' : '0')};
-  transition: all 0.3s ease-in-out;
+   position: fixed;
+   top: 85%;
+   right: 15px;
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   visibility: ${({ scrollY }) => (scrollY >= 150 ? 'true' : 'hidden')};
+   opacity: ${({ scrollY }) => (scrollY >= 150 ? '1' : '0')};
+   transition: all 0.3s ease-in-out;
+
+   ${({ theme }) => theme.mq.tablet} {
+      top: 90%;
+   }
 `;
 
 const StyledArrowUp = styled(ArrowUp)`
-  width: 50px;
-  height: 50px;
+   width: 50px;
+   height: 50px;
 `;
 
 const ButtonArrowUp = () => {
-  const [scrollY] = useDetectScroll();
-  return (
-    <StyledButton scrollY={scrollY} onClick={() => scrollTo('#wrapperLayout')}>
-      <StyledArrowUp />
-    </StyledButton>
-  );
+   const [scrollY] = useDetectScroll();
+   return (
+      <StyledButton scrollY={scrollY} onClick={() => scrollTo('#wrapperLayout')}>
+         <StyledArrowUp />
+      </StyledButton>
+   );
 };
 
 export default ButtonArrowUp;

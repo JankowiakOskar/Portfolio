@@ -6,9 +6,9 @@ import gsap from 'gsap';
 import Logo from 'components/atoms/Logo/Logo';
 import Hamburger from 'components/atoms/Hamburger/Hamburger';
 import scrollTo from 'gatsby-plugin-smoothscroll';
+import useMatchMedia from 'hooks/useMatchMedia';
 
 const Wrapper = styled.div`
-   position: relative;
    position: fixed;
    top: 0;
    right: 0;
@@ -16,30 +16,55 @@ const Wrapper = styled.div`
    height: 100%;
    display: flex;
    flex-direction: column;
-   color: ${({ theme }) => theme.darkBlue};
    background-color: ${({ theme }) => theme.lightGreen};
    clip-path: ellipse(120px 120px at 100% 0%);
    z-index: ${({ theme }) => theme.zIndex.level10};
+   overflow: hidden;
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      clip-path: none;
+      height: 70px;
+      flex-direction: row;
+      background-color: ${({ theme }) => theme.darkBlue};
+   }
 `;
 
 const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
-   flex-basis: 20%;
+   flex-basis: 15%;
+   cursor: pointer;
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      && {
+         padding: 10px 20px;
+         flex-basis: 40%;
+
+         h3 {
+            max-width: 100%;
+         }
+      }
+   }
 `;
 
 const Nav = styled.nav`
-  flex-basis: 80%;
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  /* visibility: ${({ isMenuOpen }) => (isMenuOpen ? 'true' : 'hidden')};
-  opacity: ${({ isMenuOpen }) => (isMenuOpen ? 1 : 0)}; */
-
+   flex-basis: 80%;
+   width: 100%;
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
 `;
 
 const List = styled.ul`
    padding-left: 60px;
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      padding-left: 0;
+      flex-grow: 1;
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+   }
 `;
 
 const NavElement = styled.li`
@@ -48,6 +73,14 @@ const NavElement = styled.li`
    font-size: ${({ theme }) => theme.font.size.l};
    color: ${({ theme, isActive }) => (isActive ? theme.white : theme.darkBlue)};
    font-weight: 600;
+   transition: all 0.15s ease-in-out;
+   cursor: pointer;
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      margin: 0 20px;
+      font-size: ${({ theme }) => theme.font.size.small};
+      color: ${({ theme, isActive }) => (isActive ? theme.white : theme.lightGreen)};
+   }
    &:after {
       content: '';
       position: absolute;
@@ -55,11 +88,15 @@ const NavElement = styled.li`
       height: 5px;
       top: 100%;
       left: 0;
-      border-bottom: 4px solid ${({ theme, isActive }) => (isActive ? theme.white : theme.darkBlue)};
+      border-bottom: 4px solid ${({ theme, isActive }) => isActive && theme.white};
       border-radius: 25px;
       transform: ${({ isActive }) => (isActive ? 'scale(1, 1)' : 'scale(0.2, 1)')};
       transform-origin: 0% 50%;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.2s ease-in-out;
+
+      ${({ theme }) => theme.mq.bigTablet} {
+         top: 85%;
+      }
    }
 `;
 
@@ -67,17 +104,20 @@ const HamburgerWrapper = styled.div`
    position: fixed;
    top: 25px;
    right: 25px;
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      display: none;
+   }
 `;
 
 const StyledLink = styled(Link)`
-   color: ${({ theme }) => theme.darkBlue};
    text-decoration: none;
 `;
 
 const Navigation = ({ pathname }) => {
    const [isMenuOpen, setOpenMenu] = useState(false);
    const { menuSectionList, activeSectionId } = useContext(SectionContext);
-
+   const isDesktop = useMatchMedia('(min-width: 1020px', window);
    const tl = useRef();
    const menuRef = useRef(null);
    const menuListRef = useRef(null);
@@ -89,27 +129,84 @@ const Navigation = ({ pathname }) => {
    };
 
    useEffect(() => {
-      const menu = menuRef.current;
-      const logo = logoRef.current;
-      const menuList = menuListRef.current;
-      tl.current = gsap.timeline({ pause: true });
-      gsap.set([logo, menuList], { autoAlpha: 0 });
-      tl.current
-         .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 })
-         .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
-         .fromTo(menuList, { x: '-=30' }, { x: '0', autoAlpha: 1, duration: 0.3 }, '-=0.2');
-   }, []);
+      if (menuRef && menuListRef && logoRef) {
+         const menu = menuRef.current;
+         const logo = logoRef.current;
+         const menuList = menuListRef.current;
+
+         const killTimeline = (timeline) => {
+            const targets = timeline.getChildren();
+            timeline.kill();
+            targets.forEach((target) => {
+               if (target.targets().length) {
+                  gsap.set(target.targets(), { clearProps: 'all' });
+               }
+            });
+         };
+
+         const mobileAnimation = () => {
+            tl.current = gsap.timeline({ pause: true });
+            gsap.set([logo, menuList], { autoAlpha: 0 });
+            tl.current
+               .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 })
+               .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
+               .fromTo(menuList, { x: '-=30' }, { x: '0', autoAlpha: 1, duration: 0.3 }, '-=0.2');
+         };
+
+         const desktopAnimation = () => {
+            const logoIcon = logo.querySelector('img');
+            tl.current = gsap.timeline();
+            gsap.set([logo, ...menuList.children, menu], { autoAlpha: 0 });
+
+            tl.current
+               .fromTo(menu, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.5 })
+               .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
+               .fromTo([...menuList.children], { x: '-=100', y: '-=50', scale: '0.85' }, { x: '0', y: '0', scale: '1', autoAlpha: 1, stagger: 0.15 })
+               .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
+
+            gsap.to(menu, {
+               boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.75)',
+               duration: 0.2,
+               scrollTrigger: {
+                  trigger: menu,
+                  start: 'bottom top',
+                  markers: true,
+                  toggleActions: 'play none none reverse',
+               },
+            });
+         };
+
+         if (!isDesktop) {
+            if (tl.current) killTimeline(tl.current);
+            mobileAnimation();
+         } else if (isDesktop) {
+            if (tl.current) killTimeline(tl.current);
+            setOpenMenu(false);
+            desktopAnimation();
+         }
+      }
+   }, [isDesktop]);
 
    useEffect(() => {
-      const toggleAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
-      toggleAnimation();
-   }, [isMenuOpen]);
+      if (!isDesktop && tl.current) {
+         const toggleMobileAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
+         toggleMobileAnimation();
+      }
+   }, [isMenuOpen, isDesktop, tl]);
 
    return (
       <Wrapper isOpen={isMenuOpen} ref={menuRef}>
-         <LogoWrapper ref={logoRef}>
-            <Logo color="darkBlue" />
-         </LogoWrapper>
+         {pathname === '/contact' ? (
+            <StyledLink to="/">
+               <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
+                  <Logo color={isDesktop ? 'white' : 'darkBlue'} />
+               </LogoWrapper>
+            </StyledLink>
+         ) : (
+            <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
+               <Logo color={isDesktop ? 'white' : 'darkBlue'} />
+            </LogoWrapper>
+         )}
          <Nav>
             <List ref={menuListRef}>
                {pathname === '/contact'
@@ -117,9 +214,9 @@ const Navigation = ({ pathname }) => {
                        .filter((section) => section.id === 'home' || section.id === 'contact')
                        .map((section) => {
                           return section.id === 'home' ? (
-                             <NavElement key={section.id} onClick={() => setOpenMenu(!isMenuOpen)}>
-                                <StyledLink to="/">{section.title}</StyledLink>
-                             </NavElement>
+                             <StyledLink to="/" key={section.id}>
+                                <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>{section.title}</NavElement>
+                             </StyledLink>
                           ) : (
                              <NavElement key={section.id} isActive={section.id === activeSectionId}>
                                 {section.title}
@@ -128,9 +225,9 @@ const Navigation = ({ pathname }) => {
                        })
                   : menuSectionList.map((section) => {
                        return section.id === 'contact' ? (
-                          <NavElement key={section.id} onClick={() => setOpenMenu(!isMenuOpen)}>
-                             <StyledLink to="/contact">{section.title}</StyledLink>
-                          </NavElement>
+                          <StyledLink to="/contact" key={section.id}>
+                             <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>{section.title}</NavElement>
+                          </StyledLink>
                        ) : (
                           <NavElement isActive={section.id === activeSectionId} key={section.id} onClick={() => handleScroll(`${`#${section.id}`}`)}>
                              {section.title}

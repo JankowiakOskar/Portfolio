@@ -31,7 +31,7 @@ export const font = {
       medium: '2.5rem',
       large: '3.2rem',
       xl: '4rem',
-      huge: '6rem',
+      huge: '5.5rem',
       button: '1.5rem',
    },
 };

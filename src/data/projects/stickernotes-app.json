@@ -1,17 +1,17 @@
 {
-  "lineup": 1,
-  "title": "Sticker Notes",
-  "description": "React application with a lot of features. I really encourage you to check out, in short brief you can store your photos, notes, adding or updating them to favorites and filter by typing words. Project has authorisation process, multi step form with validations, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
-  "liveLink": "https://photocompressor.netlify.app/",
-  "codeLink": "https://github.com/OskarJankowiak/img_compressor",
-  "image": "../../assets/images/StickerNotesImg.png",
-  "technologies": [
-    { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
-    { "name": "Redux", "icon": "../../assets/svg/redux.svg" },
-    { "name": "Styled Components", "icon": "../../assets/svg/styledComponents.svg" },
-    { "name": "Strapi", "icon": "../../assets/svg/strapi.svg" },
-    { "name": "Formik & Yup", "icon": "../../assets/svg/formik.svg" },
-    { "name": "Storybook", "icon": "../../assets/svg/storybook-icon.svg" },
-    { "name": "GSAP", "icon": "../../assets/svg/gsap.svg" }
-  ]
+   "lineup": 1,
+   "title": "Sticker Notes",
+   "description": "React application with a lot of features. I really encourage you to check out, in short brief you can store your photos, notes, adding or updating them to favorites and filter by typing words. Project has authorisation process, multi step form with validations, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
+   "liveLink": "https://photocompressor.netlify.app/",
+   "codeLink": "https://github.com/OskarJankowiak/img_compressor",
+   "image": "../../assets/images/StickerNotesImg.png",
+   "technologies": [
+      { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
+      { "name": "Redux", "icon": "../../assets/svg/redux.svg" },
+      { "name": "Styled Components", "icon": "../../assets/svg/styledComponents.svg" },
+      { "name": "Strapi", "icon": "../../assets/svg/strapi.svg" },
+      { "name": "Formik & Yup", "icon": "../../assets/svg/formik.svg" },
+      { "name": "Storybook", "icon": "../../assets/svg/storybook-icon.svg" },
+      { "name": "GSAP", "icon": "../../assets/svg/gsap.svg" }
+   ]
 }

@@ -4,19 +4,30 @@ import gsap from 'gsap';
 import Scene from 'assets/svg/Scene.svg';
 
 const Wrapper = styled.div`
+   width: 100%;
+   height: 100%;
    display: flex;
    justify-content: center;
    align-items: center;
 `;
 
 const StyledScene = styled(Scene)`
-   height: 50vh;
+   min-height: 50vh;
    width: 70%;
    opacity: 0.8;
 
    ${({ theme }) => theme.mq.tablet} {
-      height: 90vh;
-      width: 95%;
+      width: 100%;
+   }
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      width: 80%;
+      height: 90%;
+   }
+
+   ${({ theme }) => theme.mq.desktop} {
+      width: 60%;
+      height: 90%;
    }
 `;
 

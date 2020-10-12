@@ -8,25 +8,34 @@ import { Button } from 'components/atoms/Button/Button';
 import Logo from 'components/atoms/Logo/Logo';
 
 const Wrapper = styled.div`
-   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
-   position: relative;
    min-height: 100vh;
    width: 100%;
    background-color: ${({ theme }) => theme.darkBlue};
+`;
+
+const InnerWrapper = styled.div`
+   position: relative;
+   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
+   margin: 0 auto;
+   max-width: 1660px;
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   overflow: hidden;
 
    ${({ theme }) => theme.mq.tablet} {
-      padding: 50px;
+      padding: 100px;
       display: grid;
+      min-height: 100vh;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 2fr 1fr;
       grid-template-areas:
-         'title hero'
+         'content hero'
          'buttons hero';
+   }
+
+   ${({ theme }) => theme.mq.desktop} {
+      padding: 50px;
    }
 `;
 
@@ -42,7 +51,9 @@ const LogoWrapper = styled.div`
 
 const TitleWrapper = styled.div`
    ${({ theme }) => theme.mq.tablet} {
-      grid-area: title;
+      grid-area: content;
+      height: 100%;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -69,7 +80,7 @@ const CodingSceneWrapper = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       width: 100%;
       height: 100%;
    }
@@ -84,9 +95,8 @@ const ButtonsWrapper = styled.div`
 
    ${({ theme }) => theme.mq.tablet} {
       grid-area: buttons;
-      margin: 50px 0 0 0;
-      width: 100%;
       height: 100%;
+      width: 100%;
       flex-direction: row;
       align-items: flex-start;
    }
@@ -121,21 +131,23 @@ const Home = () => {
 
    return (
       <Wrapper data-section data-title="Home" id="home">
-         <LogoWrapper ref={logoWrapperRef}>
-            <Logo />
-         </LogoWrapper>
-         <TitleWrapper>
-            <Title ref={titleRef}>Logistic & Web development</Title>
-         </TitleWrapper>
-         <CodingSceneWrapper>
-            <CodingScene />
-         </CodingSceneWrapper>
-         <ButtonsWrapper ref={buttonsWrapperRef}>
-            <StyledButton onClick={() => scrollTo('#projects')}>Projects</StyledButton>
-            <Link to="/contact">
-               <Button secondary>Contact</Button>
-            </Link>
-         </ButtonsWrapper>
+         <InnerWrapper>
+            <LogoWrapper ref={logoWrapperRef}>
+               <Logo />
+            </LogoWrapper>
+            <TitleWrapper>
+               <Title ref={titleRef}>Logistic & Web development</Title>
+            </TitleWrapper>
+            <CodingSceneWrapper>
+               <CodingScene />
+            </CodingSceneWrapper>
+            <ButtonsWrapper ref={buttonsWrapperRef}>
+               <StyledButton onClick={() => scrollTo('#projects')}>Projects</StyledButton>
+               <Link to="/contact">
+                  <Button secondary>Contact</Button>
+               </Link>
+            </ButtonsWrapper>
+         </InnerWrapper>
       </Wrapper>
    );
 };

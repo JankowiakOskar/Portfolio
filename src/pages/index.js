@@ -6,16 +6,16 @@ import Technologies from 'components/organisms/Technologies/Technologies';
 import Projects from 'components/organisms/Projects/Projects';
 
 const Wrapper = styled.div`
-  overflow: hidden;
+   overflow: hidden;
 `;
 
 const IndexPage = () => (
-  <Wrapper id="indexPage">
-    <Home />
-    <AboutMe />
-    <Technologies />
-    <Projects />
-  </Wrapper>
+   <Wrapper id="indexPage">
+      <Home />
+      <AboutMe />
+      <Technologies />
+      <Projects />
+   </Wrapper>
 );
 
 export default IndexPage;

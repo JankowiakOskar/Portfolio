@@ -8,6 +8,25 @@ import gsap from 'gsap';
 
 const ProjectWrapper = styled.div`
    margin: 60px 0;
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      width: 100%;
+      max-height: 640px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 0.3fr 1fr 1fr 1fr;
+      grid-column-gap: 50px;
+      grid-template-areas: ${({ isOdd }) =>
+         isOdd
+            ? `'title image'
+               'description image'
+               'technologies image'
+               'buttons image'`
+            : `'image title'
+               'image description'
+               'image technologies'
+               'image buttons'`};
+   }
 `;
 
 const ProjectTitle = styled.h3`
@@ -16,12 +35,24 @@ const ProjectTitle = styled.h3`
    ${({ theme }) => theme.mq.tablet} {
       font-size: ${({ theme }) => theme.font.size.large};
    }
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      grid-area: title;
+   }
 `;
 
-const ProjectDescription = styled.p``;
+const ProjectDescription = styled.p`
+   ${({ theme }) => theme.mq.bigTablet} {
+      grid-area: description;
+      padding: 0 30px 0 0;
+   }
+`;
 
 const GridListWrapper = styled.div`
    padding: 20px 0;
+   ${({ theme }) => theme.mq.bigTablet} {
+      grid-area: technologies;
+   }
 `;
 
 const StyledGridList = styled(GridList)`
@@ -44,6 +75,10 @@ const ButtonsWrapper = styled.div`
       flex-direction: row;
       justify-content: flex-start;
    }
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      grid-area: buttons;
+   }
 `;
 
 const StyledButton = styled(Button)`
@@ -55,10 +90,24 @@ const StyledButton = styled(Button)`
 `;
 
 const ImageWrapper = styled.div`
-   max-width: 800px;
+   ${({ theme }) => theme.mq.bigTablet} {
+      grid-area: image;
+      height: 100%;
+      width: 100%;
+      margin: 50px 0 0 0;
+      display: flex;
+      align-items: flex-start;
+   }
+`;
+
+const StyledImg = styled(Img)`
    border: 2px solid ${({ theme }) => theme.darkBlue};
    border-radius: 5px;
    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      width: 100%;
+   }
 `;
 
 const ExternalLink = styled.a`
@@ -66,7 +115,7 @@ const ExternalLink = styled.a`
    color: inherit;
 `;
 
-const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd }) => {
+const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd, className }) => {
    const projectWrapperRef = useRef(null);
 
    useEffect(() => {
@@ -126,11 +175,11 @@ const Project = ({ title, description, liveLink, codeLink, technologies, image, 
       );
    }, []);
    return (
-      <ProjectWrapper ref={projectWrapperRef}>
+      <ProjectWrapper ref={projectWrapperRef} isOdd={isOdd} className={className}>
          <ProjectTitle data-project-title>{title}</ProjectTitle>
          <ProjectDescription data-project-desc>{description}</ProjectDescription>
          <ImageWrapper data-project-img>
-            <Img fluid={image} />
+            <StyledImg fluid={image} />
          </ImageWrapper>
          <GridListWrapper>
             <StyledGridList>
@@ -140,16 +189,12 @@ const Project = ({ title, description, liveLink, codeLink, technologies, image, 
             </StyledGridList>
          </GridListWrapper>
          <ButtonsWrapper data-buttons-wrapper>
-            <StyledButton>
-               <ExternalLink href={liveLink} target="_blank">
-                  Live project
-               </ExternalLink>
-            </StyledButton>
-            <Button thirdiary>
-               <ExternalLink href={codeLink} target="_blank">
-                  View Code
-               </ExternalLink>
-            </Button>
+            <ExternalLink href={liveLink} target="_blank">
+               <StyledButton>Live project</StyledButton>
+            </ExternalLink>
+            <ExternalLink href={codeLink} target="_blank">
+               <Button thirdiary>View Code</Button>
+            </ExternalLink>
          </ButtonsWrapper>
       </ProjectWrapper>
    );
