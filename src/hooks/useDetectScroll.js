@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { document } from 'browser-monads';
 
 export const useDetectScroll = () => {
    const [scroll, setScroll] = useState({
