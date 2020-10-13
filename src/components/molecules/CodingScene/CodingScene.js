@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledScene = styled(Scene)`
-   min-height: 50vh;
+   height: 45vh;
    width: 70%;
    opacity: 0.8;
 

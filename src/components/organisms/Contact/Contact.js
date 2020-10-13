@@ -3,14 +3,42 @@ import { graphql, useStaticQuery } from 'gatsby';
 import styled from 'styled-components';
 import SectionHeader from 'components/molecules/SectionHeader/SectionHeader';
 import ContactForm from 'components/molecules/ContactForm/ContactForm';
+import SocialMedia from '../../molecules/SocialMedia/SocialMedia';
 
 const Wrapper = styled.div`
-   position: relative;
-   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
    width: 100%;
-   height: 100%;
+   min-height: 100vh;
+`;
+
+const InnerWrapper = styled.div`
+   padding: ${({ theme }) => theme.layout.mobileSidesPadding};
+   margin: 0 auto;
+   max-width: 1660px;
+
    ${({ theme }) => theme.mq.tablet} {
+      padding: 50px;
+   }
+
+   ${({ theme }) => theme.mq.bigTablet} {
       padding: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+`;
+
+const ContentWrapper = styled.div`
+   ${({ theme }) => theme.mq.bigTablet} {
+      flex-basis: 50%;
+   }
+`;
+
+const StyledSocialMedia = styled(SocialMedia)`
+   ${({ theme }) => theme.mq.bigTablet} {
+      && {
+         margin-top: 25px;
+         flex-basis: 40%;
+      }
    }
 `;
 
@@ -28,10 +56,10 @@ const StyledSectionHeader = styled(SectionHeader)`
       background-repeat: no-repeat;
       background-size: 70%;
       background-position: center;
-      background-color: ${({ theme }) => theme.grey200};
+      background-color: ${({ theme }) => theme.white};
       border-radius: 25px;
       padding: 25px;
-      opacity: 0.3;
+      opacity: 0.4;
       z-index: 6;
    }
 `;
@@ -50,16 +78,20 @@ const Contact = () => {
    const {
       mailIcon: { nodes },
    } = data;
-   console.log(nodes[0].publicURL);
    return (
       <Wrapper data-section data-title="Contact" id="contact">
-         <StyledSectionHeader
-            secondary
-            titleText="Contact"
-            descriptionText="If you want contact with me, just send me message filling out form puted below or find me on social-media"
-            icon={nodes[0].publicURL}
-         />
-         <ContactForm />
+         <InnerWrapper>
+            <ContentWrapper>
+               <StyledSectionHeader
+                  secondary
+                  titleText="Contact"
+                  descriptionText="If you have any question about job, technology etc. just send me message by filling out form puted below..."
+                  icon={nodes[0].publicURL}
+               />
+               <ContactForm />
+            </ContentWrapper>
+            <StyledSocialMedia />
+         </InnerWrapper>
       </Wrapper>
    );
 };

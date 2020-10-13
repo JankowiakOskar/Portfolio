@@ -60,20 +60,22 @@ const ToolScene = ({ className }) => {
       const arrowsCircle = elements.getElementById('arrowsCircle');
       const dashedCircle = elements.getElementById('dashedCircle');
 
-      gsap.set([...men.children, ...hammerCircle.children, ...assetCircle.children, ...chartsCircle.children, ...rocketCircle.children, ...arrowsCircle.children, ...dashedCircle.children], {
+      gsap.set([wrapper, ...men.children, ...hammerCircle.children, ...assetCircle.children, ...chartsCircle.children, ...rocketCircle.children, ...arrowsCircle.children, dashedCircle], {
          autoAlpha: 0,
       });
 
-      tl.current = gsap.timeline({ paused: true });
+      tl.current = gsap.timeline({ paused: true, autoAlpha: 0 });
 
       tl.current
-         .to(wrapper, { autoAlpha: 1, duration: 0.5 })
-         .fromTo(men.children, { transformOrigin: '50% 100%' }, { autoAlpha: 1, stagger: 0.1, duration: 2 })
-         .fromTo(rocketCircle.children, { x: '-=50', y: '-=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.1, duration: 0.5 }, '-=0.5')
-         .fromTo(arrowsCircle.children, { x: '+=50', y: '+=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.1, duration: 0.5 }, '-=0.2')
-         .fromTo(hammerCircle.children, { x: '-=50', y: '+=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.1, duration: 0.5 }, '-=0.2')
-         .fromTo(assetCircle.children, { y: '+=80' }, { y: '0', autoAlpha: 1, stagger: 0.1, duration: 0.5 }, '-=0.2')
-         .fromTo(chartsCircle.children, { x: '+=50', y: '-=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.1, duration: 0.5 }, '-=0.2')
+         .fromTo(wrapper, { scaleY: '0.85', transformOrigin: '50% 100%' }, { scale: '1', autoAlpha: 1, duration: 0.6 })
+         .fromTo(men.children, { transformOrigin: '50% 100%' }, { autoAlpha: 1, stagger: 0.1, duration: 0.5 }, '-=0.3')
+         .to(dashedCircle, { autoAlpha: 1, duration: 0.8 }, '-=0.4')
+         .fromTo(rocketCircle.children, { x: '-=50', y: '-=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.12 }, '-=0.35')
+
+         .fromTo(arrowsCircle.children, { x: '+=50', y: '+=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.12 }, '-=0.35')
+         .fromTo(hammerCircle.children, { x: '-=50', y: '+=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.12 }, '-=0.35')
+         .fromTo(assetCircle.children, { y: '+=80' }, { y: '0', autoAlpha: 1, stagger: 0.12 }, '-=0.35')
+         .fromTo(chartsCircle.children, { x: '+=50', y: '-=50' }, { x: '0', y: '0', autoAlpha: 1, stagger: 0.12 }, '-=0.35')
          .to(dashedCircle, { transformOrigin: '50% 50%', rotation: 360, duration: 20, repeat: '-1' });
    }, []);
 

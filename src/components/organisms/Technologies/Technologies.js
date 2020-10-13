@@ -114,7 +114,7 @@ const Technologies = () => {
                duration: 0.7,
                scrollTrigger: {
                   trigger: title,
-                  start: 'top center',
+                  start: 'top 80%',
                },
             }
          );

@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Merriweather', sans-serif;
 
     @media(min-width: 768px) {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
     }
   }
   

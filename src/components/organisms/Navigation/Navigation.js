@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { SectionContext } from 'contexts/SectionContextProvider';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Logo from 'components/atoms/Logo/Logo';
 import Hamburger from 'components/atoms/Hamburger/Hamburger';
 import scrollTo from 'gatsby-plugin-smoothscroll';
@@ -117,7 +118,8 @@ const StyledLink = styled(Link)`
 const Navigation = ({ pathname }) => {
    const [isMenuOpen, setOpenMenu] = useState(false);
    const { menuSectionList, activeSectionId } = useContext(SectionContext);
-   const isDesktop = useMatchMedia('(min-width: 1020px', window);
+   const isDesktop = useMatchMedia('(min-width: 1020px)', window);
+
    const tl = useRef();
    const menuRef = useRef(null);
    const menuListRef = useRef(null);
@@ -144,58 +146,67 @@ const Navigation = ({ pathname }) => {
             });
          };
 
-         const mobileAnimation = () => {
-            tl.current = gsap.timeline({ pause: true });
-            gsap.set([logo, menuList], { autoAlpha: 0 });
-            tl.current
-               .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 })
-               .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
-               .fromTo(menuList, { x: '-=30' }, { x: '0', autoAlpha: 1, duration: 0.3 }, '-=0.2');
-         };
-
-         const desktopAnimation = () => {
-            const logoIcon = logo.querySelector('img');
-            tl.current = gsap.timeline();
-            gsap.set([logo, ...menuList.children, menu], { autoAlpha: 0 });
-
-            tl.current
-               .fromTo(menu, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.5 })
-               .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
-               .fromTo([...menuList.children], { x: '-=100', y: '-=50', scale: '0.85' }, { x: '0', y: '0', scale: '1', autoAlpha: 1, stagger: 0.15 })
-               .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
-
-            gsap.to(menu, {
-               boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.75)',
-               duration: 0.2,
-               scrollTrigger: {
-                  trigger: menu,
-                  start: 'bottom top',
-                  markers: true,
-                  toggleActions: 'play none none reverse',
-               },
-            });
-         };
-
          if (!isDesktop) {
-            if (tl.current) killTimeline(tl.current);
+            const mobileAnimation = () => {
+               tl.current = gsap.timeline({ paused: true });
+               gsap.set([logo, menuList], { autoAlpha: 0 });
+               tl.current
+                  .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 })
+                  .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
+                  .fromTo(menuList, { x: '-=30' }, { x: '0', autoAlpha: 1, duration: 0.3 }, '-=0.2')
+                  .reverse();
+            };
+
+            if (tl.current) {
+               killTimeline(tl.current);
+               setOpenMenu(false);
+               mobileAnimation();
+            }
             mobileAnimation();
-         } else if (isDesktop) {
-            if (tl.current) killTimeline(tl.current);
-            setOpenMenu(false);
+         } else {
+            const desktopAnimation = () => {
+               const logoIcon = logo.querySelector('img');
+               tl.current = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+               gsap.set([logo, ...menuList.children], { autoAlpha: 0 });
+
+               tl.current
+                  .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
+                  .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 })
+                  .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
+
+               ScrollTrigger.matchMedia({
+                  '(min-width: 1020px)': function () {
+                     const timeline = gsap.timeline({
+                        scrollTrigger: {
+                           trigger: menu,
+                           start: 'bottom top',
+                           end: 'top top',
+                           toggleActions: 'play none none reverse',
+                        },
+                     });
+                     timeline.to(menu, { boxShadow: '0px 4px 5px 0px rgba(0,0,0,0.75)', duration: 0.2 });
+                  },
+               });
+            };
+
+            if (tl.current) {
+               killTimeline(tl.current);
+               desktopAnimation();
+            }
             desktopAnimation();
          }
       }
    }, [isDesktop]);
 
    useEffect(() => {
-      if (!isDesktop && tl.current) {
+      if (!isDesktop) {
          const toggleMobileAnimation = () => (isMenuOpen ? tl.current.play() : tl.current.reverse());
          toggleMobileAnimation();
       }
-   }, [isMenuOpen, isDesktop, tl]);
+   }, [isMenuOpen, isDesktop]);
 
    return (
-      <Wrapper isOpen={isMenuOpen} ref={menuRef}>
+      <Wrapper ref={menuRef}>
          {pathname === '/contact' ? (
             <StyledLink to="/">
                <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>

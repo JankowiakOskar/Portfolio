@@ -13,7 +13,7 @@ import Footer from 'components/organisms/Footer/Footer';
 gsap.registerPlugin(ScrollTrigger);
 
 const WrapperLayout = styled.div`
-   width: 100%;
+   max-width: 100%;
    height: 100%;
 `;
 
