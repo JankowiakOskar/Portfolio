@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import { Button } from 'components/atoms/button/button';
+import { Button } from 'components/atoms/Button/Button';
 
 const Wrapper = styled.div`
    height: 140px;
