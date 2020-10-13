@@ -57,6 +57,7 @@ const Nav = styled.nav`
 
 const List = styled.ul`
    padding-left: 60px;
+   opacity: 0;
 
    ${({ theme }) => theme.mq.bigTablet} {
       padding-left: 0;
@@ -119,7 +120,7 @@ const Navigation = ({ pathname }) => {
    const [isMenuOpen, setOpenMenu] = useState(false);
    const { menuSectionList, activeSectionId } = useContext(SectionContext);
    const isDesktop = useMatchMedia('(min-width: 1020px)');
-
+   console.log(pathname);
    const tl = useRef();
    const menuRef = useRef(null);
    const menuListRef = useRef(null);
@@ -166,12 +167,13 @@ const Navigation = ({ pathname }) => {
          } else {
             const desktopAnimation = () => {
                const logoIcon = logo.querySelector('img');
-               tl.current = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
-               gsap.set([logo, ...menuList.children], { autoAlpha: 0 });
+               tl.current = gsap.timeline({ defaults: { ease: 'Power3.inOut' } });
+               gsap.set([menuList, ...menuList.children], { autoAlpha: 0 });
 
                tl.current
                   .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
-                  .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 })
+                  .to(menuList, { autoAlpha: 1, duration: 0.2 })
+                  .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 }, '=-0.2')
                   .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
 
                ScrollTrigger.matchMedia({
@@ -207,7 +209,7 @@ const Navigation = ({ pathname }) => {
 
    return (
       <Wrapper ref={menuRef}>
-         {pathname === '/contact' ? (
+         {pathname === '/contact' || pathname === '/contact/' ? (
             <StyledLink to="/">
                <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
                   <Logo color={isDesktop ? 'white' : 'darkBlue'} />

@@ -44,9 +44,10 @@ const CodingScene = () => {
          const plant = elements.getElementById('plant');
          const coffee = elements.getElementById('coffe');
          const box = elements.getElementById('box');
-         gsap.set([...men.children, ...monitor.children, ...plant.children, ...coffee.children, ...box.children], { autoAlpha: 0 });
+         gsap.set([wrapperRef.current, ...men.children, ...monitor.children, ...plant.children, ...coffee.children, ...box.children], { autoAlpha: 0 });
 
-         tl.to(box.children, { autoAlpha: 1, stagger: 0.2, duration: 0.5 })
+         tl.to(wrapperRef.current, { autoAlpha: 1 })
+            .to(box.children, { autoAlpha: 1, stagger: 0.2, duration: 0.5 })
             .fromTo(men.children, { scaleY: '0.8', transformOrigin: '50% 100%' }, { scaleY: '1', duration: 0.5, stagger: 0.1, autoAlpha: 1 }, '-=1')
             .fromTo(plant.children, { scaleY: '0.5', transformOrigin: '50% 100%' }, { scaleY: '1', duration: 0.7, stagger: 0.2, autoAlpha: 1 }, '-=2')
             .fromTo(coffee.children, { scaleY: '0.85' }, { scaleY: '1', stagger: 0.2, autoAlpha: 1, duration: 1 }, '-=1')

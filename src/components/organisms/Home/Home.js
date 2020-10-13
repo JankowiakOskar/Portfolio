@@ -67,6 +67,7 @@ const Title = styled.h1`
    font-weight: 800;
    text-shadow: 0 0 0 5px ${({ theme }) => theme.darkBlue};
    text-align: center;
+   opacity: 0;
 
    ${({ theme }) => theme.mq.tablet} {
       margin: 0;
@@ -92,6 +93,7 @@ const ButtonsWrapper = styled.div`
    flex-direction: column;
    justify-content: center;
    align-items: center;
+   opacity: 0;
 
    ${({ theme }) => theme.mq.tablet} {
       grid-area: buttons;
@@ -126,6 +128,7 @@ const Home = () => {
       tl.fromTo(title, { y: '+=50', scaleY: '0.9', autoAlpha: 0 }, { y: '0', autoAlpha: 1, scaleY: '1', stagger: 0.1, duration: 2 })
          .fromTo(logoElement, { autoAlpha: 0, y: '-=30' }, { autoAlpha: 1, y: 0, duration: 1 }, '-=1')
          .to(logoIcon, { y: '3', yoyo: true, repeat: -1 })
+         .to(buttonsWrapperRef.current, { autoAlpha: 1 })
          .fromTo([...buttons], { autoAlpha: 0 }, { stagger: 0.2, autoAlpha: 1, duration: 0.7 });
    }, []);
 
