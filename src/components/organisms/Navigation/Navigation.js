@@ -118,7 +118,7 @@ const StyledLink = styled(Link)`
 const Navigation = ({ pathname }) => {
    const [isMenuOpen, setOpenMenu] = useState(false);
    const { menuSectionList, activeSectionId } = useContext(SectionContext);
-   const isDesktop = useMatchMedia('(min-width: 1020px)', window);
+   const isDesktop = useMatchMedia('(min-width: 1020px)');
 
    const tl = useRef();
    const menuRef = useRef(null);
