@@ -9,6 +9,7 @@ const Wrapper = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   opacity: 0;
 `;
 
 const StyledScene = styled(Scene)`

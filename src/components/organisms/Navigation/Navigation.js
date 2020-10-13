@@ -33,6 +33,7 @@ const Wrapper = styled.div`
 const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
    flex-basis: 15%;
+   opacity: 0;
    cursor: pointer;
 
    ${({ theme }) => theme.mq.bigTablet} {
