@@ -56,7 +56,7 @@ const ContactForm = () => {
             }}
          >
             {() => (
-               <StyledForm as={Form} autoComplete="off">
+               <StyledForm as={Form} autoComplete="off" data-netlify="true" data-netlify-recaptcha="true">
                   <StyledInputElement name="name" label="Your name" type="text" />
                   <StyledInputElement name="email" label="Email Adress" type="email" />
                   <TextAreaElement name="message" label="Ask me for anything..." type="text" />
