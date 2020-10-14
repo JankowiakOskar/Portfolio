@@ -120,6 +120,7 @@ const StyledLink = styled(Link)`
 const Navigation = ({ pathname }) => {
    const [isMenuOpen, setOpenMenu] = useState(false);
    const { menuSectionList, activeSectionId } = useContext(SectionContext);
+
    const isDesktop = useMatchMedia('(min-width: 1020px)');
    const tl = useRef();
    const menuRef = useRef(null);
@@ -209,7 +210,7 @@ const Navigation = ({ pathname }) => {
 
    return (
       <Wrapper ref={menuRef}>
-         {pathname === '/contact' || '/contact/' ? (
+         {pathname === '/contact' ? (
             <StyledLink to="/">
                <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
                   <Logo color={isDesktop ? 'white' : 'darkBlue'} />
