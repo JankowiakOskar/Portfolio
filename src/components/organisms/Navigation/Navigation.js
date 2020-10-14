@@ -209,7 +209,7 @@ const Navigation = ({ pathname }) => {
 
    return (
       <Wrapper ref={menuRef}>
-         {pathname === '/contact' || pathname === '/contact/' ? (
+         {pathname === '/contact' || '/contact/' ? (
             <StyledLink to="/">
                <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
                   <Logo color={isDesktop ? 'white' : 'darkBlue'} />

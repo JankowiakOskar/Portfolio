@@ -15,6 +15,7 @@ module.exports = {
       `gatsby-plugin-sharp`,
       'gatsby-transformer-json',
       `gatsby-plugin-smoothscroll`,
+      `gatsby-plugin-remove-trailing-slashes`,
       {
          resolve: `gatsby-plugin-google-fonts`,
          options: {
