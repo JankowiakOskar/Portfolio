@@ -49,14 +49,14 @@ const ContactForm = () => {
          <Formik
             initialValues={initialValues}
             validationSchema={schema}
-            onSubmit={(values) => {
+            onSubmit={() => {
                if (!recaptchaToken) {
                   setErrors({ recaptcha: 'You have to verify recaptcha before send' });
                }
             }}
          >
             {() => (
-               <StyledForm as={Form} autoComplete="off" data-netlify="true" data-netlify-recaptcha="true">
+               <StyledForm as={Form} autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                   <StyledInputElement name="name" label="Your name" type="text" />
                   <StyledInputElement name="email" label="Email Adress" type="email" />
                   <TextAreaElement name="message" label="Ask me for anything..." type="text" />
