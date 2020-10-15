@@ -92,7 +92,7 @@ const ContactForm = () => {
                   <StyledInputElement name="email" label="Email Adress" type="email" />
                   <TextAreaElement name="message" label="Ask me for anything..." type="text" />
                   <ReCAPTCHA
-                     sitekey={`${process.env.GATSBY_RECAPTCHA_KEY}`}
+                     sitekey={`${process.env.SITE_RECAPTCHA_KEY}`}
                      theme="dark"
                      hl="en"
                      onChange={(value) => {
