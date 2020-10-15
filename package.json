@@ -43,6 +43,7 @@
       "react-dom": "^16.13.1",
       "react-google-recaptcha": "^2.1.0",
       "react-helmet": "^6.1.0",
+      "react-loader-spinner": "^3.1.14",
       "styled-components": "^5.1.1",
       "yup": "^0.29.3"
    },

@@ -64,7 +64,7 @@ const Projects = () => {
                   image {
                      childImageSharp {
                         fluid(maxWidth: 1000, quality: 100) {
-                           ...GatsbyImageSharpFluid
+                           ...GatsbyImageSharpFluid_tracedSVG
                         }
                      }
                   }

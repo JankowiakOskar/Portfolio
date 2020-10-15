@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import InputElement from 'components/molecules/InputElement/InputElement';
 import TextAreaElement from 'components/molecules/TextArea/TextArea';
@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik';
 import ErrorMessage from 'components/atoms/ErrorMessage/ErrorMessage';
 import * as yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
+import Loader from 'react-loader-spinner';
 
 const ContactFormWrapper = styled.div`
    margin-top: 50px;
@@ -26,7 +27,10 @@ const StyledInputElement = styled(InputElement)`
 `;
 
 const StyledButton = styled(Button)`
-   margin: 20px 0;
+   margin: 40px 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 `;
 
 const initialValues = {
@@ -41,22 +45,49 @@ const schema = yup.object().shape({
    message: yup.string().min(8, 'Your message has to has minimum 8 digits').required(`You didn't write any message`),
 });
 
+const encode = (data) => {
+   return Object.keys(data)
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
+};
+
 const ContactForm = () => {
    const [recaptchaToken, setRecaptchaToken] = useState('');
-   const [errors, setErrors] = useState({});
+   const [error, setError] = useState({
+      recaptcha: '',
+      response: '',
+   });
+   const formRef = useRef(null);
+
    return (
       <ContactFormWrapper>
          <Formik
             initialValues={initialValues}
             validationSchema={schema}
-            onSubmit={() => {
+            onSubmit={(values, actions) => {
                if (!recaptchaToken) {
-                  setErrors({ recaptcha: 'You have to verify recaptcha before send' });
+                  setError({ recaptcha: `You have to confirm fact that you aren't robot before send message !` });
+                  setTimeout(() => actions.setSubmitting(false), 800);
+               } else if (recaptchaToken) {
+                  const newValues = { ...values, 'g-recaptcha-response': recaptchaToken };
+                  fetch('/', {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                     body: encode({ 'form-name': 'contact-form', ...newValues }),
+                  })
+                     .then(() => {
+                        actions.resetForm();
+                     })
+                     .catch((err) => {
+                        setError(err);
+                        setTimeout(() => setError({}), 1500);
+                        actions.resetForm();
+                     });
                }
             }}
          >
-            {() => (
-               <StyledForm as={Form} autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+            {({ isSubmitting }) => (
+               <StyledForm ref={formRef} as={Form} name="contact-form" autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                   <StyledInputElement name="name" label="Your name" type="text" />
                   <StyledInputElement name="email" label="Email Adress" type="email" />
                   <TextAreaElement name="message" label="Ask me for anything..." type="text" />
@@ -66,11 +97,14 @@ const ContactForm = () => {
                      hl="en"
                      onChange={(value) => {
                         setRecaptchaToken(value);
-                        setErrors({ ...errors, recaptcha: '' });
+                        if (error.recaptcha) setError({ recaptcha: '' });
                      }}
                   />
-                  {errors.recaptcha && <ErrorMessage>{errors.recaptcha}</ErrorMessage>}
-                  <StyledButton type="submit">Send message</StyledButton>
+                  {error.recaptcha && <ErrorMessage>{error.recaptcha}</ErrorMessage>}
+                  {error.response && <ErrorMessage>{error.response}</ErrorMessage>}
+                  <StyledButton type="submit" disabled={isSubmitting}>
+                     {isSubmitting ? <Loader type="ThreeDots" color="hsl(0, 0%, 100%)" height={50} width={50} /> : 'Send message'}
+                  </StyledButton>
                </StyledForm>
             )}
          </Formik>
