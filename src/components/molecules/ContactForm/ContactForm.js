@@ -9,6 +9,8 @@ import * as yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Loader from 'react-loader-spinner';
 
+const RECAPTCHA_KEY = process.env.SITE_RECAPTCHA_KEY;
+
 const ContactFormWrapper = styled.div`
    margin-top: 50px;
    display: flex;
@@ -92,7 +94,7 @@ const ContactForm = () => {
                   <StyledInputElement name="email" label="Email Adress" type="email" />
                   <TextAreaElement name="message" label="Ask me for anything..." type="text" />
                   <ReCAPTCHA
-                     sitekey={process.env.SITE_RECAPTCHA_KEY}
+                     sitekey={RECAPTCHA_KEY}
                      theme="dark"
                      hl="en"
                      onChange={(value) => {
