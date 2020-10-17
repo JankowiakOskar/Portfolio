@@ -34,6 +34,7 @@ const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
    flex-basis: 15%;
    cursor: pointer;
+   opacity: 1;
 
    ${({ theme }) => theme.mq.bigTablet} {
       && {
@@ -180,7 +181,7 @@ const Navigation = ({ pathname }) => {
                gsap.set([logo, menuList, ...menuList.children], { autoAlpha: 0 });
 
                tl.current
-                  .to(menuList, { autoAlpha: 1, duration: 0.2 })
+                  .to(menuList, { autoAlpha: 1, duration: 0.2, delay: 0.3 })
                   .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 }, '=-0.2')
                   .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
                   .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });

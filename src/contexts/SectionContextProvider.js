@@ -36,7 +36,7 @@ const SectionContextProvider = ({ children, pathname }) => {
 
                return ScrollTrigger.create({
                   trigger: section,
-                  start: 'top 45%',
+                  start: 'top 50%',
                   end: 'bottom 55%',
                   onToggle: (self) => {
                      setActiveSection(self.trigger.id);

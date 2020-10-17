@@ -12,7 +12,7 @@ const Wrapper = styled.div`
    box-shadow: inset 0px 0px 30px -8px rgba(0, 0, 0, 0.75);
 
    ${({ theme }) => theme.mq.tablet} {
-      min-height: 0;
+      min-height: 80vh;
    }
 `;
 
