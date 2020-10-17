@@ -1,10 +1,11 @@
 {
-   "lineup": 6,
+   "lineup": 7,
    "title": "Odnova website",
-   "description": "It's another one of my first's project's. Website made for my girlfriend and her beauty services has also messy code and low performance, but it doesn't matter, project learned me a lot.",
+   "description": "It's my first website made for my girlfriend and her beauty services. Project is little messy and has low performance, but learned me a lot and what's important it's working 😁!",
    "liveLink": "http://odnovabysandra.pl/",
    "codeLink": "https://github.com/OskarJankowiak/cosmetic-site---odnovabysandra",
    "image": "../../assets/images/OdnovaImg.png",
+   "RWD": true,
    "technologies": [
       { "name": "Javascript", "icon": "../../assets/svg/javascript.svg" },
       { "name": "Scss", "icon": "../../assets/svg/sass.svg" }

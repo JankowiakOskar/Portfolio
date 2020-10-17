@@ -55,6 +55,7 @@ const Projects = () => {
                   lineup
                   liveLink
                   title
+                  RWD
                   technologies {
                      name
                      icon {
@@ -126,9 +127,9 @@ const Projects = () => {
                titleText="Projects"
                shortTitle
                descriptionText="
-               Below I present projects that I managed to implement during the last year of studying web development. Another one that I plan to do is e-commerce store. And while my technical skills aren't as good as I would like them to be, they grow from project to project."
+               Below I present projects that I managed to implement during the last year of studying web development. Another one that I plan to do is e-commerce store. Each of them taught me something new and gave me a different problem to solve. My technical skills are not as high as I would like, but they grow with each project."
             />
-            {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup } }) => (
+            {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup, RWD } }) => (
                <StyledProject
                   key={id}
                   title={title}
@@ -137,6 +138,7 @@ const Projects = () => {
                   codeLink={codeLink}
                   image={image.childImageSharp.fluid}
                   technologies={technologies}
+                  RWD={RWD}
                   isOdd={Boolean(lineup % 2)}
                />
             ))}

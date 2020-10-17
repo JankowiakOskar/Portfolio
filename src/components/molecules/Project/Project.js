@@ -41,11 +41,16 @@ const ProjectTitle = styled.h3`
    }
 `;
 
-const ProjectDescription = styled.p`
-   ${({ theme }) => theme.mq.bigTablet} {
-      grid-area: description;
-      padding: 0 30px 0 0;
-   }
+const ProjectDescriptionWrapper = styled.div`
+   grid-area: description;
+   padding: 30px 0 0 0;
+`;
+
+const ProjectDescription = styled.p``;
+
+const Span = styled.span`
+   font-weight: 800;
+   color: ${({ theme }) => theme.red};
 `;
 
 const GridListWrapper = styled.div`
@@ -91,7 +96,6 @@ const StyledButton = styled(Button)`
 
 const ImageWrapper = styled.div`
    ${({ theme }) => theme.mq.bigTablet} {
-      grid-area: image;
       height: 100%;
       width: 100%;
       margin: 50px 0 0 0;
@@ -115,15 +119,28 @@ const ExternalLink = styled.a`
    color: inherit;
 `;
 
-const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd, className }) => {
+const ProjectLink = styled(ExternalLink)`
+   margin: 20px 0 0 0;
+   grid-area: image;
+   display: block;
+`;
+
+const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd, className, RWD }) => {
    const projectWrapperRef = useRef(null);
+
+   const ProjectImageLink = () => (
+      <ProjectLink href={liveLink} target="_blank" data-project-img>
+         <ImageWrapper>
+            <StyledImg fluid={image} />
+         </ImageWrapper>
+      </ProjectLink>
+   );
 
    useEffect(() => {
       const projectWrapper = projectWrapperRef.current;
       const projectTitle = projectWrapper.querySelector(`[data-project-title]`);
       const projectDesc = projectWrapper.querySelector(`[data-project-desc]`);
       const projectImg = projectWrapper.querySelector(`[data-project-img]`);
-
       gsap.set([projectTitle, projectDesc, projectImg], { autoAlpha: 0 });
 
       gsap.fromTo(
@@ -177,10 +194,22 @@ const Project = ({ title, description, liveLink, codeLink, technologies, image, 
    return (
       <ProjectWrapper ref={projectWrapperRef} isOdd={isOdd} className={className}>
          <ProjectTitle data-project-title>{title}</ProjectTitle>
-         <ProjectDescription data-project-desc>{description}</ProjectDescription>
-         <ImageWrapper data-project-img>
-            <StyledImg fluid={image} />
-         </ImageWrapper>
+         <ProjectDescriptionWrapper data-project-desc>
+            {description}
+            {!liveLink && title !== 'My website' && (
+               <ProjectDescription>
+                  <Span>Notice: </Span>
+                  Project is still on building phase, link to live demo will be placed here soon...
+               </ProjectDescription>
+            )}
+            {RWD === false && (
+               <ProjectDescription>
+                  <Span>Notice: </Span>
+                  Application were made for bigger screen devices! To better experience, please not open on mobile phone.
+               </ProjectDescription>
+            )}
+         </ProjectDescriptionWrapper>
+         <ProjectImageLink />
          <GridListWrapper>
             <StyledGridList>
                {technologies.map(({ name, icon: { publicURL } }) => (
@@ -189,9 +218,11 @@ const Project = ({ title, description, liveLink, codeLink, technologies, image, 
             </StyledGridList>
          </GridListWrapper>
          <ButtonsWrapper data-buttons-wrapper>
-            <ExternalLink href={liveLink} target="_blank">
-               <StyledButton>Live project</StyledButton>
-            </ExternalLink>
+            {liveLink && (
+               <ExternalLink href={liveLink} target="_blank">
+                  <StyledButton>Live Project</StyledButton>
+               </ExternalLink>
+            )}
             <ExternalLink href={codeLink} target="_blank">
                <Button thirdiary>View Code</Button>
             </ExternalLink>

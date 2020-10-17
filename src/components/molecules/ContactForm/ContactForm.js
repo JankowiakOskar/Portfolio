@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { navigate } from 'gatsby';
 import styled from 'styled-components';
 import InputElement from 'components/molecules/InputElement/InputElement';
 import TextAreaElement from 'components/molecules/TextArea/TextArea';
@@ -66,10 +67,12 @@ const ContactForm = () => {
          <Formik
             initialValues={initialValues}
             validationSchema={schema}
-            onSubmit={(values, actions) => {
+            onSubmit={(values, { resetForm, setSubmitting }) => {
+               const form = formRef.current;
+
                if (!recaptchaToken) {
                   setError({ recaptcha: `You have to confirm fact that you aren't robot before send message !` });
-                  setTimeout(() => actions.setSubmitting(false), 800);
+                  setTimeout(() => setSubmitting(false), 800);
                } else if (recaptchaToken) {
                   const newValues = { ...values, 'g-recaptcha-response': recaptchaToken };
                   fetch('/', {
@@ -78,23 +81,25 @@ const ContactForm = () => {
                      body: encode({ 'form-name': 'contact-form', ...newValues }),
                   })
                      .then(() => {
-                        actions.resetForm();
+                        navigate(form.getAttribute('action'));
+                        resetForm();
                      })
                      .catch((err) => {
                         setError(err);
-                        setTimeout(() => setError({}), 1500);
-                        actions.resetForm();
+                        setTimeout(() => setError({}), 1200);
+                        resetForm();
                      });
                }
             }}
          >
             {({ isSubmitting }) => (
-               <StyledForm ref={formRef} as={Form} name="contact-form" autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
+               <StyledForm ref={formRef} as={Form} action="/success" name="contact-form" autoComplete="off" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true">
                   <StyledInputElement name="name" label="Your name" type="text" />
-                  <StyledInputElement name="email" label="Email Adress" type="email" />
+                  <StyledInputElement name="email" label="Email adress" type="email" />
                   <TextAreaElement name="message" label="Ask me for anything..." type="text" />
                   <ReCAPTCHA
                      sitekey={RECAPTCHA_KEY}
+                     data-size="compact"
                      theme="dark"
                      hl="en"
                      onChange={(value) => {

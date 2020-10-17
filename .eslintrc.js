@@ -4,6 +4,7 @@ module.exports = {
    parser: 'babel-eslint',
    env: {
       jest: true,
+      browser: true,
    },
    globals: {
       window: true,
@@ -23,6 +24,7 @@ module.exports = {
       'react/jsx-props-no-spreading': 0,
       'react/destructuring-assignment': 0,
       'react/button-has-type': 0,
+      'react/jsx-one-expression-per-line': 'off',
       'react/jsx-first-prop-new-line': [1, 'multiline'],
       'react/jsx-closing-bracket-location': [1, 'tag-aligned'],
       'react/jsx-max-props-per-line': [

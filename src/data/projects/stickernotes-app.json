@@ -1,10 +1,10 @@
 {
    "lineup": 1,
    "title": "Sticker Notes",
-   "description": "React application with a lot of features. I really encourage you to check out, in short brief you can store your photos, notes, adding or updating them to favorites and filter by typing words. Project has authorisation process, multi step form with validations, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
-   "liveLink": "https://photocompressor.netlify.app/",
-   "codeLink": "https://github.com/OskarJankowiak/img_compressor",
+   "description": "React application with a lot of features. I really encourage you to check out when i put here link to live project. In short brief you can store your photos, notes, adding or updating them to favorites, filter by typing words. Project has authorisation and authentication process with Strapi, forms with validations, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
+   "codeLink": "https://github.com/OskarJankowiak/Sticker_notes",
    "image": "../../assets/images/StickerNotesImg.png",
+   "RWD": true,
    "technologies": [
       { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
       { "name": "Redux", "icon": "../../assets/svg/redux.svg" },

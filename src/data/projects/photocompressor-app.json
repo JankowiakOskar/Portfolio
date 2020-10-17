@@ -1,10 +1,11 @@
 {
-   "lineup": 3,
+   "lineup": 4,
    "title": "Photo Compressor",
-   "description": "App made for compressing images with possibility to download them in smaller size. Project has couple simple animations which were made with GSAP library.",
+   "description": "App made for compressing images 📸 with possibility to download them in smaller size. Project has couple simple animations which were made with GSAP library.",
    "liveLink": "https://photocompressor.netlify.app/",
    "codeLink": "https://github.com/OskarJankowiak/img_compressor",
    "image": "../../assets/images/PhotoCompressorImg.png",
+   "RWD": true,
    "technologies": [
       { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
       { "name": "Sass", "icon": "../../assets/svg/sass.svg" },

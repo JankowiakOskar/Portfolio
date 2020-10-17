@@ -1,10 +1,11 @@
 {
-   "lineup": 4,
+   "lineup": 5,
    "title": "Weather App",
-   "description": "Project made with React & Hooks, Context and OpenWeather API. The app allows you to search for the weather for any location and see forecast for the next four days, it also saves everything in local memory, so if you log in again, the data remains.",
+   "description": "Project made with React & Hooks, Context API and OpenWeather API. The app allows you to check the weather for any location 🌍 and the forecast for four days, everything is saved in local storage, so if you close the app and reopen it, all your searches will show up.",
    "liveLink": "https://projectweather.netlify.app/",
    "codeLink": "https://github.com/OskarJankowiak/project_weather",
    "image": "../../assets/images/WeatherAppImg.png",
+   "RWD": true,
    "technologies": [
       { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
       { "name": "React Router", "icon": "../../assets/svg/react-router.svg" },

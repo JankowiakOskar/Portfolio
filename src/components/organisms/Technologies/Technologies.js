@@ -143,7 +143,7 @@ const Technologies = () => {
             <ContentWrapper>
                <SectionHeader
                   titleText="Technologies and Tools"
-                  descriptionText="Below I have listed the technologies and tools that I know and used in my projects. I am currently focusing on improving and consolidating the React ecosystem and tools like Gatsby.js. Then I
+                  descriptionText="Below I have listed the technologies and tools that I know and used in my projects. I am currently focusing on improving and consolidating huge react ecosystem and tools like Gatsby.js. Then I
         want to know how to test my applications."
                   secondary
                />

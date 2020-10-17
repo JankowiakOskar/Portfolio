@@ -33,8 +33,8 @@ const Wrapper = styled.div`
 const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
    flex-basis: 15%;
-   opacity: 0;
    cursor: pointer;
+   opacity: 0;
 
    ${({ theme }) => theme.mq.bigTablet} {
       && {
@@ -127,9 +127,18 @@ const Navigation = ({ pathname }) => {
    const menuListRef = useRef(null);
    const logoRef = useRef(null);
 
-   const handleScroll = (idSelector) => {
+   const handleScroll = (idSelector, desktop) => {
+      if (!desktop) {
+         setOpenMenu(!isMenuOpen);
+         scrollTo(`${idSelector}`);
+      } else {
+         scrollTo(`${idSelector}`);
+      }
+   };
+
+   const handleClose = (desktop) => {
+      if (desktop) return;
       setOpenMenu(!isMenuOpen);
-      scrollTo(`${idSelector}`);
    };
 
    useEffect(() => {
@@ -169,15 +178,16 @@ const Navigation = ({ pathname }) => {
             const desktopAnimation = () => {
                const logoIcon = logo.querySelector('img');
                tl.current = gsap.timeline({ defaults: { ease: 'Power3.inOut' } });
-               gsap.set([menuList, ...menuList.children], { autoAlpha: 0 });
+               gsap.set([logo, menuList, ...menuList.children], { autoAlpha: 0 });
 
                tl.current
-                  .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
                   .to(menuList, { autoAlpha: 1, duration: 0.2 })
                   .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 }, '=-0.2')
+                  .fromTo(logo, { y: '+=50', autoAlpha: 0 }, { y: '0', autoAlpha: 1, duration: 1 })
                   .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
 
                ScrollTrigger.matchMedia({
+                  // eslint-disable-next-line func-names
                   '(min-width: 1020px)': function () {
                      const timeline = gsap.timeline({
                         scrollTrigger: {
@@ -210,26 +220,26 @@ const Navigation = ({ pathname }) => {
 
    return (
       <Wrapper ref={menuRef}>
-         {pathname === '/contact' ? (
+         {pathname !== '/' ? (
             <StyledLink to="/">
-               <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
+               <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home', isDesktop)}>
                   <Logo color={isDesktop ? 'white' : 'darkBlue'} />
                </LogoWrapper>
             </StyledLink>
          ) : (
-            <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home')}>
+            <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home', isDesktop)}>
                <Logo color={isDesktop ? 'white' : 'darkBlue'} />
             </LogoWrapper>
          )}
          <Nav>
             <List ref={menuListRef}>
-               {pathname === '/contact'
+               {pathname !== '/'
                   ? menuSectionList
                        .filter((section) => section.id === 'home' || section.id === 'contact')
                        .map((section) => {
                           return section.id === 'home' ? (
                              <StyledLink to="/" key={section.id}>
-                                <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>{section.title}</NavElement>
+                                <NavElement onClick={() => handleClose(isDesktop)}>{section.title}</NavElement>
                              </StyledLink>
                           ) : (
                              <NavElement key={section.id} isActive={section.id === activeSectionId}>
@@ -240,10 +250,10 @@ const Navigation = ({ pathname }) => {
                   : menuSectionList.map((section) => {
                        return section.id === 'contact' ? (
                           <StyledLink to="/contact" key={section.id}>
-                             <NavElement onClick={() => setOpenMenu(!isMenuOpen)}>{section.title}</NavElement>
+                             <NavElement onClick={() => handleClose(isDesktop)}>{section.title}</NavElement>
                           </StyledLink>
                        ) : (
-                          <NavElement isActive={section.id === activeSectionId} key={section.id} onClick={() => handleScroll(`${`#${section.id}`}`)}>
+                          <NavElement isActive={section.id === activeSectionId} key={section.id} onClick={() => handleScroll(`${`#${section.id}`}`, isDesktop)}>
                              {section.title}
                           </NavElement>
                        );

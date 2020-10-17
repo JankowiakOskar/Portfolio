@@ -139,10 +139,9 @@ const AboutMe = () => {
             <ContentWrapper>
                <SectionHeader
                   titleText="About Me"
-                  descriptionText="Hello, at my website! I am Oskar, logistics specialist by education with several years of experience. As with programming world, my current job is to solve complex problems, the difference is
-        that in logistics they are mainly solved between people. Currently, I am learning programming with an emphasis on front-end, but in the future I plan to extend the scope of technology to
-        backend. I think that a passion for development emerged from my current job. 
-        I am looking for an opportunity to gain my first commercial experience as a developer.I can work remotely or in the vicinity of Poznań, Poland. If you need a react developer for the team, feel free to contact me."
+                  descriptionText="Hello, at my website! I am Oskar, logistics specialist with several years of experience. As with programming world, my current job is to solve complex problems, the difference is
+        that in logistics they are mainly solved between people. 
+        I think that's what got me interested in programming. Currently, I am learning web development with an emphasis on front-end technologies. I am looking for an opportunity to gain my first commercial experience as a developer. I can work remotely or in the vicinity of Poznań, Poland. If you need a react developer for the team, feel free to contact me."
                />
             </ContentWrapper>
             <ImageWrapper ref={imageRef}>

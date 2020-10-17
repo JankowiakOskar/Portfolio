@@ -1,0 +1,15 @@
+{
+   "lineup": 3,
+   "title": "My website",
+   "description": "My portfolio 👏 and also latest project made with fresh, hotest world technologies Gatsby and Graphql. Check every feature and if you like this website, feel free to send me message 💬, I will be grateful.",
+   "codeLink": "https://github.com/OskarJankowiak/project_weather",
+   "image": "../../assets/images/PortfolioImg.png",
+   "RWD": true,
+   "technologies": [
+      { "name": "Gatsby", "icon": "../../assets/svg/gatsbyjs-icon.svg" },
+      { "name": "Graphql", "icon": "../../assets/svg/graphql-icon.svg" },
+      { "name": "Styled Components", "icon": "../../assets/svg/styledComponents.svg" },
+      { "name": "Formik & Yup", "icon": "../../assets/svg/formik.svg" },
+      { "name": "GSAP", "icon": "../../assets/svg/gsap.svg" }
+   ]
+}

@@ -31,6 +31,14 @@ const StyledMessenger = styled(Messenger)`
    padding: 10px;
    border-radius: 25px;
    opacity: 0.9;
+   transition: all 0.15s ease-in-out;
+
+   &:hover {
+      ${({ theme }) => theme.mq.bigTablet} {
+         transform: scale(1.05);
+         background-color: ${({ theme }) => theme.white};
+      }
+   }
 `;
 const StyledEmail = styled(Email)`
    width: 50px;
@@ -40,6 +48,14 @@ const StyledEmail = styled(Email)`
    padding: 10px;
    border-radius: 25px;
    opacity: 0.9;
+   transition: all 0.15s ease-in-out;
+
+   &:hover {
+      ${({ theme }) => theme.mq.bigTablet} {
+         transform: scale(1.05);
+         background-color: ${({ theme }) => theme.white};
+      }
+   }
 `;
 
 const StyledInstagram = styled(Instagram)`
@@ -50,6 +66,14 @@ const StyledInstagram = styled(Instagram)`
    padding: 10px;
    border-radius: 15px;
    opacity: 0.9;
+   transition: all 0.15s ease-in-out;
+
+   &:hover {
+      ${({ theme }) => theme.mq.bigTablet} {
+         transform: scale(1.05);
+         background-color: ${({ theme }) => theme.white};
+      }
+   }
 `;
 
 const SocialElement = styled.div`
