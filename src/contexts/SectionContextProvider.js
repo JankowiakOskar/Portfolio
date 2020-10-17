@@ -38,7 +38,6 @@ const SectionContextProvider = ({ children, pathname }) => {
                   trigger: section,
                   start: 'top 45%',
                   end: 'bottom 55%',
-                  markers: true,
                   onToggle: (self) => {
                      setActiveSection(self.trigger.id);
                      if (titleUnderline) {

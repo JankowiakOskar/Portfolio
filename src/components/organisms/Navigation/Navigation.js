@@ -34,7 +34,6 @@ const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
    flex-basis: 15%;
    cursor: pointer;
-   opacity: 0;
 
    ${({ theme }) => theme.mq.bigTablet} {
       && {
@@ -183,7 +182,7 @@ const Navigation = ({ pathname }) => {
                tl.current
                   .to(menuList, { autoAlpha: 1, duration: 0.2 })
                   .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 }, '=-0.2')
-                  .fromTo(logo, { y: '+=50', autoAlpha: 0 }, { y: '0', autoAlpha: 1, duration: 1 })
+                  .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
                   .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
 
                ScrollTrigger.matchMedia({
