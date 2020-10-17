@@ -2,7 +2,7 @@
    "lineup": 3,
    "title": "My website",
    "description": "My portfolio 👏 and also latest project made with fresh, hotest world technologies Gatsby and Graphql. Check every feature and if you like this website, feel free to send me message 💬, I will be grateful.",
-   "codeLink": "https://github.com/OskarJankowiak/project_weather",
+   "codeLink": "https://github.com/OskarJankowiak/portfolio_gatsby",
    "image": "../../assets/images/PortfolioImg.png",
    "RWD": true,
    "technologies": [
