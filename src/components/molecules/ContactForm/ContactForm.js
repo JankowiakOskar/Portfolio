@@ -32,6 +32,7 @@ const StyledInputElement = styled(InputElement)`
 const StyledButton = styled(Button)`
    margin: 40px 0;
    display: flex;
+   flex-direction: column;
    justify-content: center;
    align-items: center;
 `;
