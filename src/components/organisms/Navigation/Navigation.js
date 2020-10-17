@@ -34,7 +34,6 @@ const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
    flex-basis: 15%;
    cursor: pointer;
-   opacity: 1;
 
    ${({ theme }) => theme.mq.bigTablet} {
       && {
@@ -178,12 +177,13 @@ const Navigation = ({ pathname }) => {
             const desktopAnimation = () => {
                const logoIcon = logo.querySelector('img');
                tl.current = gsap.timeline({ defaults: { ease: 'Power3.inOut' } });
-               gsap.set([logo, menuList, ...menuList.children], { autoAlpha: 0 });
+               gsap.set([logoIcon, logo, menuList, ...menuList.children], { autoAlpha: 0 });
 
                tl.current
                   .to(menuList, { autoAlpha: 1, duration: 0.2, delay: 0.3 })
                   .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 }, '=-0.2')
-                  .fromTo(logo, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
+                  .to(logo, { autoAlpha: 1 })
+                  .fromTo(logoIcon, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
                   .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
 
                ScrollTrigger.matchMedia({
@@ -222,8 +222,8 @@ const Navigation = ({ pathname }) => {
       <Wrapper ref={menuRef}>
          {pathname !== '/' ? (
             <StyledLink to="/">
-               <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home', isDesktop)}>
-                  <Logo color={isDesktop ? 'white' : 'darkBlue'} />
+               <LogoWrapper onClick={() => handleScroll('#home', isDesktop)}>
+                  <Logo ref={logoRef} color={isDesktop ? 'white' : 'darkBlue'} />
                </LogoWrapper>
             </StyledLink>
          ) : (
