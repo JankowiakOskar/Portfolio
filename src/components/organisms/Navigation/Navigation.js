@@ -33,17 +33,14 @@ const Wrapper = styled.div`
 const LogoWrapper = styled.div`
    padding: 20px 0 20px 5px;
    flex-basis: 15%;
+   width: 50%;
    cursor: pointer;
 
    ${({ theme }) => theme.mq.bigTablet} {
-      && {
-         padding: 10px 20px;
-         flex-basis: 40%;
-
-         h3 {
-            max-width: 100%;
-         }
-      }
+      padding: 10px 20px;
+      height: 100%;
+      width: 100%;
+      flex-grow: 1;
    }
 `;
 
@@ -116,6 +113,12 @@ const StyledLink = styled(Link)`
    text-decoration: none;
 `;
 
+const LogoLink = styled(StyledLink)`
+   ${({ theme }) => theme.mq.bigTablet} {
+      flex-grow: 1;
+   }
+`;
+
 const Navigation = ({ pathname }) => {
    const [isMenuOpen, setOpenMenu] = useState(false);
    const { menuSectionList, activeSectionId } = useContext(SectionContext);
@@ -145,6 +148,7 @@ const Navigation = ({ pathname }) => {
          const menu = menuRef.current;
          const logo = logoRef.current;
          const menuList = menuListRef.current;
+         const logoIcon = logo.querySelector('img');
 
          const killTimeline = (timeline) => {
             const targets = timeline.getChildren();
@@ -159,10 +163,10 @@ const Navigation = ({ pathname }) => {
          if (!isDesktop) {
             const mobileAnimation = () => {
                tl.current = gsap.timeline({ paused: true });
-               gsap.set([logo, menuList], { autoAlpha: 0 });
+               gsap.set([logo, logoIcon, menuList], { autoAlpha: 0 });
                tl.current
                   .to(menu, { clipPath: 'ellipse(1000px 90% at 100% 0%)', duration: 0.6, delay: 0.2 })
-                  .fromTo(logo, { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
+                  .fromTo([logo, logoIcon], { y: '+=30' }, { y: '0', autoAlpha: 1, duration: 0.2 }, '-=0.2')
                   .fromTo(menuList, { x: '-=30' }, { x: '0', autoAlpha: 1, duration: 0.3 }, '-=0.2')
                   .reverse();
             };
@@ -175,13 +179,13 @@ const Navigation = ({ pathname }) => {
             mobileAnimation();
          } else {
             const desktopAnimation = () => {
-               const logoIcon = logo.querySelector('img');
                tl.current = gsap.timeline({ defaults: { ease: 'Power3.inOut' } });
-               gsap.set([logoIcon, menuList, ...menuList.children], { autoAlpha: 0 });
+               gsap.set([logo, logoIcon, menuList, ...menuList.children], { autoAlpha: 0 });
 
                tl.current
                   .to(menuList, { autoAlpha: 1, duration: 0.2, delay: 1 })
                   .fromTo([...menuList.children], { y: '-=100' }, { y: '0', autoAlpha: 1, stagger: 0.3 }, '=-0.2')
+                  .to(logo, { autoAlpha: 1 })
                   .fromTo(logoIcon, { y: '+=50' }, { y: '0', autoAlpha: 1, duration: 1 })
                   .to(logoIcon, { y: '+5', repeat: '-1', yoyo: 'true' });
 
@@ -220,11 +224,11 @@ const Navigation = ({ pathname }) => {
    return (
       <Wrapper ref={menuRef}>
          {pathname !== '/' ? (
-            <StyledLink to="/">
-               <LogoWrapper onClick={() => handleScroll('#home', isDesktop)}>
-                  <Logo ref={logoRef} color={isDesktop ? 'white' : 'darkBlue'} />
+            <LogoLink to="/">
+               <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home', isDesktop)}>
+                  <Logo color={isDesktop ? 'white' : 'darkBlue'} />
                </LogoWrapper>
-            </StyledLink>
+            </LogoLink>
          ) : (
             <LogoWrapper ref={logoRef} onClick={() => handleScroll('#home', isDesktop)}>
                <Logo color={isDesktop ? 'white' : 'darkBlue'} />

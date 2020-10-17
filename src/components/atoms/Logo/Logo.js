@@ -17,6 +17,10 @@ const Title = styled.h3`
    padding-left: 5px;
    max-width: 150px;
    color: ${({ theme, color }) => (color ? theme[color] : theme.white)};
+
+   ${({ theme }) => theme.mq.bigTablet} {
+      max-width: none;
+   }
 `;
 
 const Logo = ({ color, className }) => {
