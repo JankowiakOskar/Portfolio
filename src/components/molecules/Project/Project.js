@@ -50,7 +50,8 @@ const ProjectDescription = styled.p``;
 
 const Span = styled.span`
    font-weight: 800;
-   color: ${({ theme }) => theme.red};
+   color: ${({ theme, color }) => (color ? theme[color] : theme.red)};
+   border-bottom: ${({ theme, border }) => (border ? `1px solid ${theme.black}` : 'none')};
 `;
 
 const GridListWrapper = styled.div`
@@ -125,9 +126,8 @@ const ProjectLink = styled(ExternalLink)`
    display: block;
 `;
 
-const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd, className, RWD }) => {
+const Project = ({ title, description, liveLink, codeLink, technologies, image, isOdd, className, RWD, testUser }) => {
    const projectWrapperRef = useRef(null);
-
    const ProjectImageLink = () => (
       <ProjectLink href={liveLink} target="_blank" data-project-img>
          <ImageWrapper>
@@ -202,7 +202,22 @@ const Project = ({ title, description, liveLink, codeLink, technologies, image, 
                   Project is still on building phase, link to live demo will be placed here soon...
                </ProjectDescription>
             )}
-            {RWD === false && (
+            {testUser && (
+               <ProjectDescription>
+                  <Span>Notice: </Span>
+                  App uses server, it may take some time to start. You can log in using{' '}
+                  <Span color="black" border>
+                     {' '}
+                     email: {testUser.login}
+                  </Span>{' '}
+                  and{' '}
+                  <Span color="black" border>
+                     password: {testUser.password}
+                  </Span>{' '}
+                  or create account with your own data.
+               </ProjectDescription>
+            )}
+            {!RWD && (
                <ProjectDescription>
                   <Span>Notice: </Span>
                   Application were made for bigger screen devices! To better experience, please not open on mobile phone.

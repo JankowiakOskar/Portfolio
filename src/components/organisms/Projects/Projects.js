@@ -56,6 +56,10 @@ const Projects = () => {
                   liveLink
                   title
                   RWD
+                  testUser {
+                     login
+                     password
+                  }
                   technologies {
                      name
                      icon {
@@ -77,7 +81,6 @@ const Projects = () => {
    const {
       projects: { edges },
    } = data;
-
    const wrapperRef = useRef(null);
 
    useEffect(() => {
@@ -129,13 +132,14 @@ const Projects = () => {
                descriptionText="
                Below I present projects that I managed to implement during the last year of studying web development. Another one that I plan to do is e-commerce store. Each of them taught me something new and gave me a different problem to solve. My technical skills are not as high as I would like, but they grow with each project."
             />
-            {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup, RWD } }) => (
+            {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup, RWD, testUser } }) => (
                <StyledProject
                   key={id}
                   title={title}
                   description={description}
                   liveLink={liveLink}
                   codeLink={codeLink}
+                  testUser={testUser}
                   image={image.childImageSharp.fluid}
                   technologies={technologies}
                   RWD={RWD}
