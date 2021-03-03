@@ -1,5 +1,5 @@
 {
-   "lineup": 6,
+   "lineup": 9,
    "title": "Money Transfer Memoriser",
    "description": "It's one of my first applications ✌, but in retrospect it is project which i have the greatest sentiment. Project was made only with pure JavaScript, CSS and Local Storage. App has form where you can adding your money transfers by filling out form with data like recipent, number account, currency etc. You can also delete or update transfers and checking how much transfers are unpaid 💸.",
    "liveLink": "https://transfermemoriser.netlify.app/",

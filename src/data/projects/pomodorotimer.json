@@ -1,0 +1,16 @@
+{
+  "lineup": 3,
+  "title": "Pomodoro Timer ⏰",
+  "description": "Pomodoro timer, it's technique for keeping your mind on focus mode with 25 minutes sessions and making short or long breaks.",
+  "codeLink": "https://github.com/OskarJankowiak/next-pomodoro",
+  "liveLink": "https://sticker-notes.netlify.app/",
+  "image": "../../assets/images/pomodoro.png",
+  "RWD": true,
+  "technologies": [
+     { "name": "Next.js", "icon": "../../assets/svg/nextjs-icon.svg" },
+     { "name": "TypeScript", "icon": "../../assets/svg/typescript-icon.svg" },
+     { "name": "Redux", "icon": "../../assets/svg/redux.svg" },
+     { "name": "CSS Modules", "icon": "../../assets/icons/cssmodules-icon.png"},
+     { "name": "Framer Motion", "icon": "../../assets/icons/framer-motion-icon.png" }
+  ]
+}

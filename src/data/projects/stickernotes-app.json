@@ -1,7 +1,7 @@
 {
-   "lineup": 1,
+   "lineup": 2,
    "title": "Sticker Notes",
-   "description": "React CRUD application with a lot of features. In short brief you can store your photos, notes, adding or updating them to favorites, filter by typing words. Project has authorisation and authentication process with Strapi, forms with validations, modal, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
+   "description": "React CRUD application. In short brief you can store your photos, notes, adding or updating them to favorites, filter by typing words. Project has authorisation and authentication process provided by Strapi, forms with validations, modal, dropdown zone to adding photos, possibilites to like on clicking heart icon, animations and more.",
    "codeLink": "https://github.com/OskarJankowiak/Sticker_notes",
    "liveLink": "https://sticker-notes.netlify.app/",
    "image": "../../assets/images/StickerNotesImg.png",
@@ -11,7 +11,7 @@
       "password": "testuser123"
    },
    "technologies": [
-      { "name": "React & Hooks", "icon": "../../assets/svg/react-icon.svg" },
+      { "name": "React", "icon": "../../assets/svg/react-icon.svg" },
       { "name": "Redux", "icon": "../../assets/svg/redux.svg" },
       { "name": "Styled Components", "icon": "../../assets/svg/styledComponents.svg" },
       { "name": "Strapi", "icon": "../../assets/svg/strapi.svg" },

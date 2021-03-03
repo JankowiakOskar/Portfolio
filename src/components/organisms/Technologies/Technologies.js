@@ -138,13 +138,15 @@ const Technologies = () => {
    }, []);
 
    return (
-      <Wrapper data-section data-title="Technologies" id="technology" ref={wrapperRef}>
+      <Wrapper
+data-section data-title="Technologies" id="technology"
+ref={wrapperRef}
+      >
          <InnerWrapper>
             <ContentWrapper>
                <SectionHeader
                   titleText="Technologies and Tools"
-                  descriptionText="Below I have listed the technologies and tools that I know and used in my projects. I am currently focusing on improving and consolidating huge react ecosystem and tools like Gatsby.js. Then I
-        want to know how to test my applications."
+                  descriptionText="Below I have listed some technologies and tools that I know and used in my projects. Currently, I'm learning TypeScript and Jest."
                   secondary
                />
                <StyledGridList>

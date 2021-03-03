@@ -141,7 +141,7 @@ const Home = () => {
                <Logo />
             </LogoWrapper>
             <TitleWrapper>
-               <Title ref={titleRef}>Logistic & Web development</Title>
+               <Title ref={titleRef}>Web Development</Title>
             </TitleWrapper>
             <CodingSceneWrapper>
                <CodingScene />

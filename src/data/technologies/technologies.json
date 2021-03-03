@@ -1,14 +1,14 @@
 [
    {
-      "name": "CSS",
-      "icon": "../../assets/svg/css3.svg"
-   },
-   {
-      "name": "Javascript ES6+",
+      "name": "JavaScript ES6+",
       "icon": "../../assets/svg/javascript.svg"
    },
    {
-      "name": "React & Hooks",
+      "name": "TypeScript",
+      "icon": "../../assets/svg/typescript-icon.svg"
+   },
+   {
+      "name": "React",
       "icon": "../../assets/svg/react-icon.svg"
    },
    {
@@ -16,21 +16,31 @@
       "icon": "../../assets/svg/redux.svg"
    },
    {
-      "name": "Sass",
-      "icon": "../../assets/svg/sass.svg"
+      "name": "CSS",
+      "icon": "../../assets/svg/css3.svg"
    },
    {
       "name": "Styled Components",
       "icon": "../../assets/svg/styledComponents.svg"
    },
    {
+      "name": "Sass",
+      "icon": "../../assets/svg/sass.svg"
+   },
+   {
       "name": "Gatsby",
       "icon": "../../assets/svg/gatsbyjs-icon.svg"
    },
+   
    {
-      "name": "Graphql",
-      "icon": "../../assets/svg/graphql-icon.svg"
+      "name": "Jest",
+      "icon": "../../assets/svg/jest-icon.svg"
    },
+   {
+      "name": "React Testing Library",
+      "icon": "../../assets/icons/react-testing-library.png"
+   },
+
    {
       "name": "Axios",
       "icon": "../../assets/svg/axios.svg"

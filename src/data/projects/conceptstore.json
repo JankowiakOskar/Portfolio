@@ -1,0 +1,18 @@
+{
+  "lineup": 1,
+  "title": "Concept Store 👟",
+  "description": "E-Commerce app with a lot of features, wich you can expect in similiar e-commerce real websites. Set filters, add some clothes to cart or try order something.",
+  "codeLink": "https://github.com/OskarJankowiak/concept-store",
+  "liveLink": "https://concept-store.netlify.app/",
+  "image": "../../assets/images/conceptstore.png",
+  "RWD": true,
+  "technologies": [
+     { "name": "React", "icon": "../../assets/svg/react-icon.svg" },
+     { "name": "Styled Components", "icon": "../../assets/svg/styledComponents.svg" },
+     { "name": "Strapi", "icon": "../../assets/svg/strapi.svg" },
+     { "name": "Jest", "icon": "../../assets/svg/jest-icon.svg" },
+     { "name": "React Testing Library", "icon": "../../assets/icons/react-testing-library.png"},
+     { "name": "Framer Motion", "icon": "../../assets/icons/framer-motion-icon.png" },
+     { "name": "Formik & Yup", "icon": "../../assets/svg/formik.svg" }
+  ]
+}
