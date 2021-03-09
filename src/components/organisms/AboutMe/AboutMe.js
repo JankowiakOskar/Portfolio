@@ -144,7 +144,7 @@ ref={wrapperRef}
                   titleText="About Me"
                   descriptionText="Hello, at my website! I am Oskar, logistics specialist with several years of experience. Just like in programming world, my previous job was to solve problems, the difference is
         that in logistics they are mainly solved between people. 
-        I think that's what got me interested in programming. Currently, I am learning web development with an emphasis on front-end technologies, but in the near future I want learn also node.js and react native. I am looking for an opportunity to gain my first commercial experience in IT as developer. I can work remotely or in the vicinity of Poznań, Poland. If you need a developer for the team, feel free to contact me."
+        I think that's what got me interested in programming. Currently, I'm learning web development with an emphasis on front-end technologies, but in the nearest future I'd like to gain more knowledge about backend development. I'm looking for an opportunity to gain my first commercial experience in IT as a developer. I can work remotely or in the vicinity of Poznań, Poland. If you need a developer for the team, feel free to contact me."
                />
             </ContentWrapper>
             <ImageWrapper ref={imageRef}>
