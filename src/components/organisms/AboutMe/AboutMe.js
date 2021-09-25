@@ -134,17 +134,13 @@ const AboutMe = () => {
    }, []);
 
    return (
-      <Wrapper
-data-section data-title="About Me" id="aboutMe"
-ref={wrapperRef}
-      >
+      <Wrapper data-section data-title="About Me" id="aboutMe" ref={wrapperRef}>
          <InnerWrapper>
             <ContentWrapper>
                <SectionHeader
                   titleText="About Me"
-                  descriptionText="Hello, at my website! I am Oskar, logistics specialist with several years of experience. Just like in programming world, my previous job was to solve problems, the difference is
-        that in logistics they are mainly solved between people. 
-        I think that's what got me interested in programming. Currently, I'm learning web development with an emphasis on front-end technologies, but in the nearest future I'd like to gain more knowledge about backend development. I'm looking for an opportunity to gain my first commercial experience in IT as a developer. I can work remotely or in the vicinity of Poznań, Poland. If you need a developer for the team, feel free to contact me."
+                  descriptionText="
+                  Welcome to my website! I'm Oskar, a React developer. For several years I was involved in economics, transport and logistics, which gave me knowledge about how business, money and the market work. I decided to change the industry to IT, I work as a programmer. Currently creating frontend of a web application, which is an editor for creating websites in landingi.com."
                />
             </ContentWrapper>
             <ImageWrapper ref={imageRef}>

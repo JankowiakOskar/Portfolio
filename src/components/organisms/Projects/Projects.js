@@ -124,17 +124,9 @@ const Projects = () => {
    }, []);
 
    return (
-      <Wrapper
-data-section data-title="Projects" id="projects"
-ref={wrapperRef}
-      >
+      <Wrapper data-section data-title="Projects" id="projects" ref={wrapperRef}>
          <InnerWrapper>
-            <StyledSectionHeader
-               titleText="Projects"
-               shortTitle
-               descriptionText="
-               Below I present my side projects that I managed to implement during studying web development. Each of them taught me something new and gave me a different problem to solve."
-            />
+            <StyledSectionHeader titleText="My works" shortTitle />
             {edges.map(({ node: { id, title, description, codeLink, liveLink, image, technologies, lineup, RWD, testUser } }) => (
                <StyledProject
                   key={id}

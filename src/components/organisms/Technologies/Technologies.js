@@ -138,17 +138,10 @@ const Technologies = () => {
    }, []);
 
    return (
-      <Wrapper
-data-section data-title="Technologies" id="technology"
-ref={wrapperRef}
-      >
+      <Wrapper data-section data-title="Technologies" id="technology" ref={wrapperRef}>
          <InnerWrapper>
             <ContentWrapper>
-               <SectionHeader
-                  titleText="Technologies and Tools"
-                  descriptionText="Below I have listed some technologies and tools that I know and used in my projects. Currently, I'm learning TypeScript and Jest."
-                  secondary
-               />
+               <SectionHeader titleText="Technologies and tools which I use" secondary />
                <StyledGridList>
                   {edges.map(
                      ({
